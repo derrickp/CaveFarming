@@ -1,8 +1,12 @@
-apply plugin: "application"
+plugins {
+    id "application"
+    id "kotlin"
+    id "java-library"
+    id "idea"
+}
 
 sourceSets.main.resources.srcDirs += [rootProject.file("assets").path]
 mainClassName = "dev.plotsky.cavefarming.lwjgl3.Lwjgl3Launcher"
-eclipse.project.name = appName + "-lwjgl3"
 sourceCompatibility = 11.0
 
 dependencies {
