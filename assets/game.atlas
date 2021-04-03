@@ -1,0 +1,181 @@
+
+game.png
+size: 1024, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+big_demon_idle
+  rotate: false
+  xy: 2, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 4
+big_demon_idle
+  rotate: false
+  xy: 74, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 1
+big_demon_idle
+  rotate: false
+  xy: 146, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 3
+big_demon_idle
+  rotate: false
+  xy: 218, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 2
+big_demon_run
+  rotate: false
+  xy: 38, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 4
+big_demon_run
+  rotate: false
+  xy: 110, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 1
+big_demon_run
+  rotate: false
+  xy: 182, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 3
+big_demon_run
+  rotate: false
+  xy: 254, 19
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: 2
+big_zombie_idle
+  rotate: false
+  xy: 326, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 4
+big_zombie_idle
+  rotate: false
+  xy: 362, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 1
+big_zombie_idle
+  rotate: false
+  xy: 434, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 3
+big_zombie_idle
+  rotate: false
+  xy: 506, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 2
+big_zombie_run
+  rotate: false
+  xy: 290, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 1
+big_zombie_run
+  rotate: false
+  xy: 398, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 3
+big_zombie_run
+  rotate: false
+  xy: 470, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 2
+big_zombie_run
+  rotate: false
+  xy: 542, 21
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: 4
+hole
+  rotate: false
+  xy: 2, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+ogre_idle
+  rotate: false
+  xy: 578, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+ogre_idle
+  rotate: false
+  xy: 650, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+ogre_idle
+  rotate: false
+  xy: 722, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+ogre_idle
+  rotate: false
+  xy: 830, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+ogre_run
+  rotate: false
+  xy: 614, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+ogre_run
+  rotate: false
+  xy: 686, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+ogre_run
+  rotate: false
+  xy: 758, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+ogre_run
+  rotate: false
+  xy: 794, 23
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1

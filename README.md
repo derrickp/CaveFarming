@@ -2,8 +2,6 @@
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
 
-Project template included simple launchers and an empty `ApplicationAdapter` extension.
-
 ## Gradle
 
 This project uses [Gradle](http://gradle.org/) to manage dependencies. Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands. Useful Gradle tasks and flags:
@@ -24,3 +22,6 @@ This project uses [Gradle](http://gradle.org/) to manage dependencies. Gradle wr
 
 Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
 For example, `core:clean` removes `build` folder only from the `core` project.
+
+## Credits
+ - Drawn assets gotten from itch.io from 0x72 (https://0x72.itch.io/dungeontileset-ii)
