@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import dev.plotsky.cavefarming.components.*
-import dev.plotsky.cavefarming.systems.ActionsSystem
-import dev.plotsky.cavefarming.systems.InputSystem
-import dev.plotsky.cavefarming.systems.MoveSystem
-import dev.plotsky.cavefarming.systems.RenderFontCharacterSystem
+import dev.plotsky.cavefarming.systems.*
 import ktx.app.KtxScreen
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -44,7 +41,8 @@ class OverWorldScreen(
             // add systems
             addSystem(InputSystem())
             addSystem(MoveSystem())
-            addSystem(ActionsSystem())
+            addSystem(MovementDirectionSystem())
+            addSystem(ActionsSystem(engine))
             addSystem(RenderFontCharacterSystem(batch, font, camera))
 //            addSystem(RenderSystem(hole, batch, font, camera))
             // add CollisionSystem last as it removes entities and this should always
