@@ -17,7 +17,8 @@ class LoadingScreen(
 ) : KtxScreen {
     override fun render(delta: Float) {
         batch.use(camera) {
-            font.draw(it, "[GOLDENROD]Welcome to Cave Farming!", 200f, 400f)
+            font.draw(it, "[GOLDENROD]Welcome to Cave Farming!", 300f, 400f)
+            font.draw(it, "[GOLDENROD]Press Enter or click the screen to begin", 275f, 380f)
         }
 
         if (Gdx.input.isTouched || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
