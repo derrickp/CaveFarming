@@ -1,12 +1,15 @@
 package dev.plotsky.cavefarming.screens
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import dev.plotsky.cavefarming.CaveFarming
 import dev.plotsky.cavefarming.components.FontCharacterComponent
 import dev.plotsky.cavefarming.components.InputComponent
+import dev.plotsky.cavefarming.components.InventoryComponent
 import dev.plotsky.cavefarming.components.MoveComponent
 import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.TransformComponent
@@ -27,28 +30,52 @@ class OverWorldScreen(
     private val engine: PooledEngine
 ) : KtxScreen {
     override fun render(delta: Float) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
+            removeSystems()
+            caveFarming.setScreen<InventoryScreen>()
+        }
+
         // everything is now done within our entity engine --> update it every frame
         engine.update(delta)
     }
 
     override fun show() {
         // initialize entity engine
-        engine.apply {
-            entity {
-                with<NameComponent> { name = "goblin" }
-                with<FontCharacterComponent> {
-                    character = "g"
-                    color = "GREEN"
-                    z = 100
-                }
-                with<MoveComponent>()
-                with<TransformComponent> {
-                    bounds.x = 100f
-                    bounds.y = 200f
-                }
-                with<InputComponent>()
+        if (engine.entities.size() == 0) {
+            addMainCharacter()
+        }
+
+        if (engine.systems.size() == 0) {
+            addSystems()
+        }
+
+        super.show()
+    }
+
+    private fun addMainCharacter() {
+        engine.entity {
+            with<NameComponent> { name = "goblin" }
+            with<FontCharacterComponent> {
+                character = "g"
+                color = "GREEN"
+                z = 100
             }
-            // add systems
+            with<MoveComponent>()
+            with<TransformComponent> {
+                bounds.x = 100f
+                bounds.y = 200f
+            }
+            with<InputComponent>()
+            with<InventoryComponent>()
+        }
+    }
+
+    private fun removeSystems() {
+        engine.removeAllSystems()
+    }
+
+    private fun addSystems() {
+        engine.apply {
             addSystem(InputSystem())
             addSystem(MoveSystem())
             addSystem(MovementDirectionSystem())

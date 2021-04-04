@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import dev.plotsky.cavefarming.screens.InventoryScreen
 import dev.plotsky.cavefarming.screens.LoadingScreen
 import dev.plotsky.cavefarming.screens.OverWorldScreen
 import ktx.app.KtxGame
@@ -30,6 +31,7 @@ class CaveFarming : KtxGame<KtxScreen>() {
             bindSingleton(PooledEngine())
             addScreen(LoadingScreen(this@CaveFarming, inject(), inject(), inject()))
             addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
+            addScreen(InventoryScreen(this@CaveFarming, inject(), inject(), inject()))
         }
 
         setScreen<LoadingScreen>()
