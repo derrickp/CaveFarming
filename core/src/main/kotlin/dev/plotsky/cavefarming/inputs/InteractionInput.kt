@@ -1,5 +1,6 @@
 package dev.plotsky.cavefarming.inputs
 
 enum class InteractionInput {
-    SPACE
+    SPACE,
+    M
 }
