@@ -5,7 +5,11 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.Rectangle
-import dev.plotsky.cavefarming.components.*
+import dev.plotsky.cavefarming.components.CropComponent
+import dev.plotsky.cavefarming.components.FontCharacterComponent
+import dev.plotsky.cavefarming.components.InputComponent
+import dev.plotsky.cavefarming.components.NameComponent
+import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.inputs.InteractionInput
 import ktx.ashley.allOf
 import ktx.ashley.entity
