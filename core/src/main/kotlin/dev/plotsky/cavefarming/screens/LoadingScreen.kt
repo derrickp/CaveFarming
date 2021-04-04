@@ -5,12 +5,12 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
-import dev.plotsky.cavefarming.Game
+import dev.plotsky.cavefarming.CaveFarming
 import ktx.app.KtxScreen
 import ktx.graphics.use
 
 class LoadingScreen(
-    private val game: Game,
+    private val caveFarming: CaveFarming,
     private val batch: Batch,
     private val font: BitmapFont,
     private val camera: OrthographicCamera
@@ -22,8 +22,8 @@ class LoadingScreen(
         }
 
         if (Gdx.input.isTouched || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            game.setScreen<OverWorldScreen>()
-            game.removeScreen<LoadingScreen>()
+            caveFarming.setScreen<OverWorldScreen>()
+            caveFarming.removeScreen<LoadingScreen>()
             dispose()
         }
 

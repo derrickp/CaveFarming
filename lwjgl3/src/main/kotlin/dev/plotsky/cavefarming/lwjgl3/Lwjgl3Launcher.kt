@@ -2,7 +2,7 @@ package dev.plotsky.cavefarming.lwjgl3
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
-import dev.plotsky.cavefarming.Game
+import dev.plotsky.cavefarming.CaveFarming
 
 /** Launches the desktop (LWJGL3) application.  */
 object Lwjgl3Launcher {
@@ -12,7 +12,7 @@ object Lwjgl3Launcher {
     }
 
     private fun createApplication(): Lwjgl3Application {
-        return Lwjgl3Application(Game(), configuration)
+        return Lwjgl3Application(CaveFarming(), configuration)
     }
 
     private val configuration = Lwjgl3ApplicationConfiguration().apply {

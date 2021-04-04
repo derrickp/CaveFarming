@@ -13,7 +13,7 @@ import ktx.inject.Context
 import ktx.inject.register
 
 /** [ktx.app.KtxGame] implementation shared by all platforms.  */
-class Game : KtxGame<KtxScreen>() {
+class CaveFarming : KtxGame<KtxScreen>() {
     private val context = Context()
     override fun create() {
         context.register {
@@ -28,8 +28,8 @@ class Game : KtxGame<KtxScreen>() {
                 setToOrtho(false, 800f, 480f)
             })
             bindSingleton(PooledEngine())
-            addScreen(LoadingScreen(this@Game, inject(), inject(), inject()))
-            addScreen(OverWorldScreen(inject(), inject(), inject(), inject()))
+            addScreen(LoadingScreen(this@CaveFarming, inject(), inject(), inject()))
+            addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
         }
 
         setScreen<LoadingScreen>()

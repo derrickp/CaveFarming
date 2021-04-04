@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
+import dev.plotsky.cavefarming.CaveFarming
 import dev.plotsky.cavefarming.components.FontCharacterComponent
 import dev.plotsky.cavefarming.components.InputComponent
 import dev.plotsky.cavefarming.components.MoveComponent
@@ -19,6 +20,7 @@ import ktx.ashley.entity
 import ktx.ashley.with
 
 class OverWorldScreen(
+    private val caveFarming: CaveFarming,
     private val batch: Batch,
     private val font: BitmapFont,
     private val camera: OrthographicCamera,
