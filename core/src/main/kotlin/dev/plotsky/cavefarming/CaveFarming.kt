@@ -1,6 +1,7 @@
 package dev.plotsky.cavefarming
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -29,8 +30,10 @@ class CaveFarming : KtxGame<KtxScreen>() {
                 setToOrtho(false, 800f, 480f)
             })
             bindSingleton(PooledEngine())
-            addScreen(LoadingScreen(this@CaveFarming, inject(), inject(), inject()))
-            addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
+            val assetManager = AssetManager()
+            bindSingleton(assetManager)
+            addScreen(LoadingScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
+            addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject(), inject(), inject()))
             addScreen(InventoryScreen(this@CaveFarming, inject(), inject(), inject()))
         }
 
