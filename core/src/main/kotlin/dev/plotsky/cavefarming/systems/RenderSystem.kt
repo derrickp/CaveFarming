@@ -21,7 +21,7 @@ class RenderSystem(
         forceSort()
         camera.update()
         batch.projectionMatrix = camera.combined
-        batch.use {
+        batch.use(camera) {
             super.update(deltaTime)
         }
     }
