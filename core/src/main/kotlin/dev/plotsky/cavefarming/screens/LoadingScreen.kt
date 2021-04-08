@@ -16,8 +16,8 @@ class LoadingScreen(
     private val caveFarming: CaveFarming,
     private val batch: Batch,
     private val font: BitmapFont,
-    private val camera: OrthographicCamera,
-    private val assetManager: AssetManager
+    private val assetManager: AssetManager,
+    private val camera: OrthographicCamera
 ) : KtxScreen {
     override fun show() {
         TextureAtlasAssets.values().forEach { assetManager.load(it) }
@@ -26,9 +26,29 @@ class LoadingScreen(
 
     override fun render(delta: Float) {
         assetManager.update()
+        camera.update()
         batch.use(camera) {
-            font.draw(it, "[GOLDENROD]Welcome to Cave Farming!", 300f, 400f)
-            font.draw(it, "[GOLDENROD]Press Enter or click the screen to begin", 275f, 380f)
+            font.draw(
+                it,
+                "[GOLDENROD]Welcome to Cave Farming!",
+                camera.position.x - 75f,
+                Gdx.graphics.height - 150f
+            )
+            if (assetManager.isFinished) {
+                font.draw(
+                    it,
+                    "[GOLDENROD]Press Enter or click the screen to begin",
+                    camera.position.x - 100f,
+                    Gdx.graphics.height - 200f
+                )
+            } else {
+                font.draw(
+                    it,
+                    "[GOLDENROD]Loading...",
+                    camera.position.x - 25f,
+                    Gdx.graphics.height - 200f
+                )
+            }
         }
 
         if ((Gdx.input.isTouched || Gdx.input.isKeyPressed(Input.Keys.ENTER)) && assetManager.isFinished) {
