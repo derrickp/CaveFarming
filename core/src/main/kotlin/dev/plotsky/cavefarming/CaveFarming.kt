@@ -14,6 +14,9 @@ import ktx.app.KtxScreen
 import ktx.inject.Context
 import ktx.inject.register
 
+const val GAME_WIDTH = 16f
+const val GAME_HEIGHT = 9f
+
 /** [ktx.app.KtxGame] implementation shared by all platforms.  */
 class CaveFarming : KtxGame<KtxScreen>() {
     private val context = Context()
