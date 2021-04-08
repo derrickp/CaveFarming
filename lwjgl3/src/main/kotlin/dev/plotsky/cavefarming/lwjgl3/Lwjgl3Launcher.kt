@@ -17,7 +17,7 @@ object Lwjgl3Launcher {
 
     private val configuration = Lwjgl3ApplicationConfiguration().apply {
         setTitle("CaveFarming")
-        setWindowedMode(640, 480)
+        setWindowedMode(16 * 80, 9 * 80)
         setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png")
     }
 }
