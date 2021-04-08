@@ -37,6 +37,7 @@ class CaveFarming : KtxGame<KtxScreen>() {
             val assetManager = AssetManager()
             bindSingleton(assetManager)
             addScreen(LoadingScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
+            addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject()))
             addScreen(InventoryScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
         }
 

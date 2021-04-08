@@ -5,6 +5,8 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import dev.plotsky.cavefarming.GAME_HEIGHT
+import dev.plotsky.cavefarming.GAME_WIDTH
 import dev.plotsky.cavefarming.components.MoveComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import ktx.ashley.allOf
@@ -22,10 +24,10 @@ class MoveSystem : IteratingSystem(allOf(TransformComponent::class, MoveComponen
     }
 
     private fun calculateX(bounds: Rectangle, speed: Vector2, deltaTime: Float): Float {
-        return MathUtils.clamp(bounds.x + speed.x * deltaTime, 0f, 800f - 10f)
+        return MathUtils.clamp(bounds.x + speed.x * deltaTime, 0f, GAME_WIDTH - 1f)
     }
 
     private fun calculateY(bounds: Rectangle, speed: Vector2, deltaTime: Float): Float {
-        return MathUtils.clamp(bounds.y + speed.y * deltaTime, 20f, 480f)
+        return MathUtils.clamp(bounds.y + speed.y * deltaTime, 0f, GAME_HEIGHT - 1f)
     }
 }

@@ -4,13 +4,16 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.ashley.systems.IteratingSystem
+import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.math.Rectangle
 import dev.plotsky.cavefarming.Crop
+import dev.plotsky.cavefarming.assets.TextureAtlasAssets
+import dev.plotsky.cavefarming.assets.get
 import dev.plotsky.cavefarming.components.CropComponent
-import dev.plotsky.cavefarming.components.FontCharacterComponent
 import dev.plotsky.cavefarming.components.InputComponent
 import dev.plotsky.cavefarming.components.InventoryComponent
 import dev.plotsky.cavefarming.components.NameComponent
+import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.inputs.InteractionInput
 import ktx.ashley.allOf
@@ -18,7 +21,10 @@ import ktx.ashley.entity
 import ktx.ashley.get
 import ktx.ashley.with
 
-class ActionsSystem(private val engine: PooledEngine) : IteratingSystem(
+class ActionsSystem(
+    private val engine: PooledEngine,
+    private val assetManager: AssetManager
+) : IteratingSystem(
     allOf(InputComponent::class, TransformComponent::class, InventoryComponent::class).get()
 ) {
     private val cropFamily: Family by lazy {
@@ -39,8 +45,8 @@ class ActionsSystem(private val engine: PooledEngine) : IteratingSystem(
             val possibleBounds = Rectangle().apply {
                 x = transform.bounds.x
                 y = transform.bounds.y
-                height = 25f
-                width = 25f
+                height = 0.6f
+                width = 0.6f
             }
             val overlapping = existingCrops.any { crop ->
                 crop[TransformComponent.mapper]?.bounds?.overlaps(possibleBounds) ?: false
@@ -65,10 +71,8 @@ class ActionsSystem(private val engine: PooledEngine) : IteratingSystem(
             with<TransformComponent> {
                 bounds.set(where)
             }
-            with<FontCharacterComponent> {
-                character = "m"
-                color = "BROWN"
-                z = 50
+            with<RenderComponent> {
+                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("mushroom"))
             }
             with<CropComponent> { type = "mushroom" }
         }
@@ -80,10 +84,8 @@ class ActionsSystem(private val engine: PooledEngine) : IteratingSystem(
             with<TransformComponent> {
                 bounds.set(where)
             }
-            with<FontCharacterComponent> {
-                character = "t"
-                color = "YELLOW"
-                z = 50
+            with<RenderComponent> {
+                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("turnip"))
             }
             with<CropComponent> { type = "turnip" }
         }
@@ -95,10 +97,8 @@ class ActionsSystem(private val engine: PooledEngine) : IteratingSystem(
             with<TransformComponent> {
                 bounds.set(where)
             }
-            with<FontCharacterComponent> {
-                character = "k"
-                color = "BLUE"
-                z = 50
+            with<RenderComponent> {
+                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("kane"))
             }
             with<CropComponent> { type = "kane" }
         }
@@ -110,10 +110,8 @@ class ActionsSystem(private val engine: PooledEngine) : IteratingSystem(
             with<TransformComponent> {
                 bounds.set(where)
             }
-            with<FontCharacterComponent> {
-                character = "p"
-                color = "RED"
-                z = 50
+            with<RenderComponent> {
+                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("potato"))
             }
             with<CropComponent> { type = "potato" }
         }

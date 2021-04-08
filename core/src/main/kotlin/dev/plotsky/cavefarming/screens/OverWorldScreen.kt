@@ -4,10 +4,11 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.assets.AssetManager
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.utils.viewport.FitViewport
 import dev.plotsky.cavefarming.CaveFarming
+import dev.plotsky.cavefarming.GAME_HEIGHT
+import dev.plotsky.cavefarming.GAME_WIDTH
 import dev.plotsky.cavefarming.assets.TextureAtlasAssets
 import dev.plotsky.cavefarming.assets.get
 import dev.plotsky.cavefarming.components.InputComponent
@@ -20,7 +21,6 @@ import dev.plotsky.cavefarming.systems.ActionsSystem
 import dev.plotsky.cavefarming.systems.InputSystem
 import dev.plotsky.cavefarming.systems.MoveSystem
 import dev.plotsky.cavefarming.systems.MovementDirectionSystem
-import dev.plotsky.cavefarming.systems.RenderFontCharacterSystem
 import dev.plotsky.cavefarming.systems.RenderSystem
 import ktx.app.KtxScreen
 import ktx.ashley.entity
@@ -29,12 +29,16 @@ import ktx.ashley.with
 class OverWorldScreen(
     private val caveFarming: CaveFarming,
     private val batch: Batch,
-    private val font: BitmapFont,
-    private val camera: OrthographicCamera,
     private val engine: PooledEngine,
     private val assetManager: AssetManager
 ) : KtxScreen {
+    private val viewport = FitViewport(GAME_WIDTH, GAME_HEIGHT)
+    override fun resize(width: Int, height: Int) {
+        viewport.update(width, height)
+        super.resize(width, height)
+    }
     override fun render(delta: Float) {
+        viewport.camera.position.set(GAME_WIDTH / 2, GAME_HEIGHT / 2, 0f)
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             removeSystems()
             caveFarming.setScreen<InventoryScreen>()
@@ -62,10 +66,10 @@ class OverWorldScreen(
             with<NameComponent> { name = "goblin" }
             with<MoveComponent>()
             with<TransformComponent> {
-                bounds.x = 100f
-                bounds.y = 200f
-                bounds.width = 32f
-                bounds.height = 32f
+                bounds.x = GAME_WIDTH / 2
+                bounds.y = GAME_HEIGHT / 2
+                bounds.width = 1f
+                bounds.height = 1f
             }
             with<InputComponent>()
             with<InventoryComponent>()
@@ -84,9 +88,8 @@ class OverWorldScreen(
             addSystem(InputSystem())
             addSystem(MoveSystem())
             addSystem(MovementDirectionSystem())
-            addSystem(ActionsSystem(engine))
-            addSystem(RenderFontCharacterSystem(batch, font, camera))
-            addSystem(RenderSystem(batch, camera))
+            addSystem(ActionsSystem(engine, assetManager))
+            addSystem(RenderSystem(batch, viewport))
 //            addSystem(RenderSystem(hole, batch, font, camera))
             // add CollisionSystem last as it removes entities and this should always
             // happen at the end of an engine update frame
