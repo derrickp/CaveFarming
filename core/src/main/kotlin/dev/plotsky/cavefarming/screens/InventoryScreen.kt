@@ -3,6 +3,7 @@ package dev.plotsky.cavefarming.screens
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import dev.plotsky.cavefarming.CaveFarming
@@ -16,11 +17,13 @@ class InventoryScreen(
     private val batch: Batch,
     private val font: BitmapFont,
     private val engine: PooledEngine,
+    private val camera: OrthographicCamera
 ) : KtxScreen {
     override fun render(delta: Float) {
+        camera.update()
         // everything is now done within our entity engine --> update it every frame
-        batch.use {
-            font.draw(it, "INVENTORY", 50f, 50f);
+        batch.use(camera) {
+            font.draw(it, "INVENTORY", 50f, 50f)
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
