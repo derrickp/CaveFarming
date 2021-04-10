@@ -118,19 +118,26 @@ big_zombie_run
   index: 4
 hole
   rotate: false
-  xy: 866, 39
+  xy: 22, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 kane
   rotate: false
-  xy: 22, 1
+  xy: 886, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 mushroom
+  rotate: false
+  xy: 866, 39
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+mushroom_spores
   rotate: false
   xy: 2, 1
   size: 16, 16
@@ -195,14 +202,14 @@ ogre_run
   index: 1
 potato
   rotate: false
-  xy: 42, 1
+  xy: 906, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 turnip
   rotate: false
-  xy: 886, 39
+  xy: 42, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
