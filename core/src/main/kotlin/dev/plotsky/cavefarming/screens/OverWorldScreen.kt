@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.Batch
+import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.utils.viewport.FitViewport
 import dev.plotsky.cavefarming.CaveFarming
 import dev.plotsky.cavefarming.GAME_HEIGHT
@@ -84,12 +85,13 @@ class OverWorldScreen(
     }
 
     private fun addSystems() {
+        val map: TiledMap = assetManager.get("first_cave.tmx")
         engine.apply {
             addSystem(InputSystem())
             addSystem(MoveSystem())
             addSystem(MovementDirectionSystem())
             addSystem(ActionsSystem(engine, assetManager))
-            addSystem(RenderSystem(batch, viewport))
+            addSystem(RenderSystem(batch, viewport, map))
 //            addSystem(RenderSystem(hole, batch, font, camera))
             // add CollisionSystem last as it removes entities and this should always
             // happen at the end of an engine update frame

@@ -14,6 +14,9 @@ import ktx.app.KtxGame
 import ktx.app.KtxScreen
 import ktx.inject.Context
 import ktx.inject.register
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver
+import com.badlogic.gdx.maps.tiled.TmxMapLoader
+import com.badlogic.gdx.maps.tiled.TiledMap
 
 const val GAME_WIDTH = 16f
 const val GAME_HEIGHT = 9f
@@ -35,6 +38,8 @@ class CaveFarming : KtxGame<KtxScreen>() {
             })
             bindSingleton(PooledEngine())
             val assetManager = AssetManager()
+            assetManager.setLoader(TiledMap::class.java, TmxMapLoader(InternalFileHandleResolver()))
+
             bindSingleton(assetManager)
             addScreen(LoadingScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
             addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject()))

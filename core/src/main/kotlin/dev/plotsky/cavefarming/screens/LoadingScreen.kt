@@ -11,6 +11,7 @@ import dev.plotsky.cavefarming.assets.TextureAtlasAssets
 import dev.plotsky.cavefarming.assets.load
 import ktx.app.KtxScreen
 import ktx.graphics.use
+import com.badlogic.gdx.maps.tiled.TiledMap
 
 class LoadingScreen(
     private val caveFarming: CaveFarming,
@@ -21,6 +22,7 @@ class LoadingScreen(
 ) : KtxScreen {
     override fun show() {
         TextureAtlasAssets.values().forEach { assetManager.load(it) }
+        assetManager.load("first_cave.tmx", TiledMap::class.java)
         super.show()
     }
 
