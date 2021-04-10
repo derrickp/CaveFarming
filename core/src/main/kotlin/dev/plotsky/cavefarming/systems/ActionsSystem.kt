@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.math.Rectangle
-import dev.plotsky.cavefarming.Crop
 import dev.plotsky.cavefarming.assets.TextureAtlasAssets
 import dev.plotsky.cavefarming.assets.get
 import dev.plotsky.cavefarming.components.CropComponent
@@ -15,6 +14,7 @@ import dev.plotsky.cavefarming.components.InventoryComponent
 import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
+import dev.plotsky.cavefarming.crops.CropType
 import dev.plotsky.cavefarming.inputs.InteractionInput
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -57,10 +57,10 @@ class ActionsSystem(
             }
 
             when (entity[InventoryComponent.mapper]!!.currentCrop) {
-                Crop.MUSHROOMS -> spawnMushroom(possibleBounds)
-                Crop.TURNIPS -> spawnTurnip(possibleBounds)
-                Crop.KANES -> spawnKane(possibleBounds)
-                Crop.POTATOES -> spawnPotato(possibleBounds)
+                CropType.MUSHROOMS -> spawnMushroom(possibleBounds)
+                CropType.TURNIPS -> spawnTurnip(possibleBounds)
+                CropType.KANES -> spawnKane(possibleBounds)
+                CropType.POTATOES -> spawnPotato(possibleBounds)
             }
         }
     }
@@ -74,7 +74,7 @@ class ActionsSystem(
             with<RenderComponent> {
                 sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("mushroom"))
             }
-            with<CropComponent> { type = "mushroom" }
+            with<CropComponent> { cropType = CropType.MUSHROOMS }
         }
     }
 
@@ -87,7 +87,7 @@ class ActionsSystem(
             with<RenderComponent> {
                 sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("turnip"))
             }
-            with<CropComponent> { type = "turnip" }
+            with<CropComponent> { cropType = CropType.TURNIPS }
         }
     }
 
@@ -100,7 +100,7 @@ class ActionsSystem(
             with<RenderComponent> {
                 sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("kane"))
             }
-            with<CropComponent> { type = "kane" }
+            with<CropComponent> { cropType = CropType.KANES }
         }
     }
 
@@ -113,7 +113,7 @@ class ActionsSystem(
             with<RenderComponent> {
                 sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("potato"))
             }
-            with<CropComponent> { type = "potato" }
+            with<CropComponent> { cropType = CropType.POTATOES }
         }
     }
 }

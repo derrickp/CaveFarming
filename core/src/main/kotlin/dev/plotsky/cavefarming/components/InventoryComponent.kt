@@ -1,7 +1,7 @@
 package dev.plotsky.cavefarming.components
 
 import com.badlogic.ashley.core.Component
-import dev.plotsky.cavefarming.Crop
+import dev.plotsky.cavefarming.crops.CropType
 import ktx.ashley.mapperFor
 
 class InventoryComponent : Component {
@@ -9,6 +9,11 @@ class InventoryComponent : Component {
         val mapper = mapperFor<InventoryComponent>()
     }
 
-    val crops = listOf(Crop.MUSHROOMS, Crop.KANES, Crop.POTATOES, Crop.TURNIPS)
-    var currentCrop: Crop = Crop.MUSHROOMS
+    val crops = listOf(
+        CropType.MUSHROOMS,
+        CropType.KANES,
+        CropType.POTATOES,
+        CropType.TURNIPS
+    )
+    var currentCrop: CropType = CropType.MUSHROOMS
 }

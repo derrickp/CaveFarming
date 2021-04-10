@@ -1,6 +1,6 @@
-package dev.plotsky.cavefarming
+package dev.plotsky.cavefarming.crops
 
-enum class Crop(var type: String) {
+enum class CropType(private val type: String) {
     MUSHROOMS("Mushrooms"),
     POTATOES("Potatoes"),
     TURNIPS("Turnips"),

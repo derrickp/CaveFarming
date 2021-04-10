@@ -1,6 +1,7 @@
 package dev.plotsky.cavefarming.components
 
 import com.badlogic.ashley.core.Component
+import dev.plotsky.cavefarming.crops.CropType
 import ktx.ashley.mapperFor
 
 class CropComponent : Component {
@@ -8,5 +9,5 @@ class CropComponent : Component {
         val mapper = mapperFor<CropComponent>()
     }
 
-    var type = ""
+    var cropType: CropType = CropType.MUSHROOMS
 }

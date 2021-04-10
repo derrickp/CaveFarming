@@ -28,10 +28,10 @@ class MovementDirectionSystem : IteratingSystem(
 
         when {
             input.movementKeys.contains(MovementInput.RIGHT) -> {
-                move.speed.x = 16f
+                move.speed.x = 16f * 0.6f
             }
             input.movementKeys.contains(MovementInput.LEFT) -> {
-                move.speed.x = -16f
+                move.speed.x = -16f * 0.6f
             }
             else -> {
                 move.speed.x = 0f
@@ -40,10 +40,10 @@ class MovementDirectionSystem : IteratingSystem(
 
         when {
             input.movementKeys.contains(MovementInput.UP) -> {
-                move.speed.y = 9f
+                move.speed.y = 9f * 0.6f
             }
             input.movementKeys.contains(MovementInput.DOWN) -> {
-                move.speed.y = -9f
+                move.speed.y = -9f * 0.6f
             }
             else -> {
                 move.speed.y = 0f
