@@ -12,6 +12,7 @@ import dev.plotsky.cavefarming.GAME_HEIGHT
 import dev.plotsky.cavefarming.GAME_WIDTH
 import dev.plotsky.cavefarming.assets.TextureAtlasAssets
 import dev.plotsky.cavefarming.assets.get
+import dev.plotsky.cavefarming.components.CharacterComponent
 import dev.plotsky.cavefarming.components.InputComponent
 import dev.plotsky.cavefarming.components.InventoryComponent
 import dev.plotsky.cavefarming.components.MoveComponent
@@ -19,6 +20,7 @@ import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.systems.ActionsSystem
+import dev.plotsky.cavefarming.systems.CameraMoveSystem
 import dev.plotsky.cavefarming.systems.InputSystem
 import dev.plotsky.cavefarming.systems.MoveSystem
 import dev.plotsky.cavefarming.systems.MovementDirectionSystem
@@ -77,6 +79,7 @@ class OverWorldScreen(
             with<RenderComponent> {
                 sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("ogre_idle"))
             }
+            with<CharacterComponent>()
         }
     }
 
@@ -88,8 +91,9 @@ class OverWorldScreen(
         val map: TiledMap = assetManager.get("first_cave.tmx")
         engine.apply {
             addSystem(InputSystem())
-            addSystem(MoveSystem())
             addSystem(MovementDirectionSystem())
+            addSystem(MoveSystem())
+            addSystem(CameraMoveSystem(viewport))
             addSystem(ActionsSystem(engine, assetManager))
             addSystem(RenderSystem(batch, viewport, map))
 //            addSystem(RenderSystem(hole, batch, font, camera))
