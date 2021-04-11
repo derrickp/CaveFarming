@@ -61,6 +61,9 @@ class ActionsSystem(
     }
 
     private fun spawnCrop(where: Vector2, configuration: CropConfiguration) {
+        if (isOutOfBounds(where)) {
+            return
+        }
         val existingCrops = engine.getEntitiesFor(cropFamily)
         val growingBounds = Rectangle(
             where.x,
@@ -125,5 +128,9 @@ class ActionsSystem(
         for (cell in gridCells) {
             spawnCrop(cell, potato)
         }
+    }
+
+    private fun isOutOfBounds(where: Vector2): Boolean {
+        return where.x < 0 || where.x > 39 || where.y < 0 || where.y > 21.75
     }
 }
