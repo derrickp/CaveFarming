@@ -1,7 +1,10 @@
 package dev.plotsky.cavefarming.components
 
 import com.badlogic.ashley.core.Component
-import dev.plotsky.cavefarming.crops.CropType
+import com.badlogic.gdx.math.Rectangle
+import dev.plotsky.cavefarming.crops.CropConfiguration
+import dev.plotsky.cavefarming.crops.CropConfigurations.mushroom
+import dev.plotsky.cavefarming.crops.GrowthStage
 import ktx.ashley.mapperFor
 
 class CropComponent : Component {
@@ -9,5 +12,7 @@ class CropComponent : Component {
         val mapper = mapperFor<CropComponent>()
     }
 
-    var cropType: CropType = CropType.MUSHROOMS
+    var configuration: CropConfiguration = mushroom
+    val growingBounds = Rectangle()
+    var growthStage = GrowthStage.SEED
 }

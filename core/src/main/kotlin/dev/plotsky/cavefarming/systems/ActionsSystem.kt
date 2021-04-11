@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.math.Rectangle
+import com.badlogic.gdx.math.Vector2
 import dev.plotsky.cavefarming.assets.TextureAtlasAssets
 import dev.plotsky.cavefarming.assets.get
 import dev.plotsky.cavefarming.components.CropComponent
@@ -14,7 +15,14 @@ import dev.plotsky.cavefarming.components.InventoryComponent
 import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
+import dev.plotsky.cavefarming.crops.CropConfiguration
+import dev.plotsky.cavefarming.crops.CropConfigurations.buildCropGrid
+import dev.plotsky.cavefarming.crops.CropConfigurations.kane
+import dev.plotsky.cavefarming.crops.CropConfigurations.mushroom
+import dev.plotsky.cavefarming.crops.CropConfigurations.potato
+import dev.plotsky.cavefarming.crops.CropConfigurations.turnip
 import dev.plotsky.cavefarming.crops.CropType
+import dev.plotsky.cavefarming.crops.GrowthStage
 import dev.plotsky.cavefarming.inputs.InteractionInput
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -40,80 +48,82 @@ class ActionsSystem(
     }
 
     private fun handlePressedPlantCrop(entity: Entity) {
-        val existingCrops = engine.getEntitiesFor(cropFamily)
         entity[TransformComponent.mapper]?.let { transform ->
-            val possibleBounds = Rectangle().apply {
-                x = transform.bounds.x
-                y = transform.bounds.y
-                height = 0.6f
-                width = 0.6f
-            }
-            val overlapping = existingCrops.any { crop ->
-                crop[TransformComponent.mapper]?.bounds?.overlaps(possibleBounds) ?: false
-            }
-
-            if (overlapping) {
-                return
-            }
+            val where = Vector2(transform.bounds.x, transform.bounds.y)
 
             when (entity[InventoryComponent.mapper]!!.currentCrop) {
-                CropType.MUSHROOMS -> spawnMushroom(possibleBounds)
-                CropType.TURNIPS -> spawnTurnip(possibleBounds)
-                CropType.KANES -> spawnKane(possibleBounds)
-                CropType.POTATOES -> spawnPotato(possibleBounds)
+                CropType.MUSHROOMS -> spawnMushroom(where)
+                CropType.TURNIPS -> spawnTurnip(where)
+                CropType.KANES -> spawnKane(where)
+                CropType.POTATOES -> spawnPotato(where)
             }
         }
     }
 
-    private fun spawnMushroom(where: Rectangle) {
+    private fun spawnCrop(where: Vector2, configuration: CropConfiguration) {
+        val existingCrops = engine.getEntitiesFor(cropFamily)
+        val growingBounds = Rectangle(
+            where.x,
+            where.y,
+            configuration.areaNeededPerCrop.first,
+            configuration.areaNeededPerCrop.second
+        )
+        val overlapping = existingCrops.any { crop ->
+            val existingGrowingBounds = crop[CropComponent.mapper]?.growingBounds
+            existingGrowingBounds?.overlaps(growingBounds) ?: false
+        }
+        if (overlapping) {
+            return
+        }
         engine.entity {
             with<NameComponent> { name = "crop" }
             with<TransformComponent> {
-                bounds.set(where)
+                bounds.set(
+                    Rectangle(
+                        where.x,
+                        where.y,
+                        0.6f,
+                        0.6f
+                    )
+                )
             }
+            val region = assetManager[TextureAtlasAssets.CaveFarming].findRegion(configuration.seedRegionName)
             with<RenderComponent> {
-                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("mushroom"))
+                sprite.setRegion(region)
             }
-            with<CropComponent> { cropType = CropType.MUSHROOMS }
+            with<CropComponent> {
+                this.configuration = configuration
+                this.growingBounds.set(growingBounds)
+                this.growthStage = GrowthStage.SEED
+            }
         }
     }
 
-    private fun spawnTurnip(where: Rectangle) {
-        engine.entity {
-            with<NameComponent> { name = "crop" }
-            with<TransformComponent> {
-                bounds.set(where)
-            }
-            with<RenderComponent> {
-                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("turnip"))
-            }
-            with<CropComponent> { cropType = CropType.TURNIPS }
+    private fun spawnMushroom(where: Vector2) {
+        val gridCells = buildCropGrid(Vector2(where.x, where.y), mushroom)
+        for (cell in gridCells) {
+            spawnCrop(cell, mushroom)
         }
     }
 
-    private fun spawnKane(where: Rectangle) {
-        engine.entity {
-            with<NameComponent> { name = "crop" }
-            with<TransformComponent> {
-                bounds.set(where)
-            }
-            with<RenderComponent> {
-                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("kane"))
-            }
-            with<CropComponent> { cropType = CropType.KANES }
+    private fun spawnTurnip(where: Vector2) {
+        val gridCells = buildCropGrid(Vector2(where.x, where.y), turnip)
+        for (cell in gridCells) {
+            spawnCrop(cell, turnip)
         }
     }
 
-    private fun spawnPotato(where: Rectangle) {
-        engine.entity {
-            with<NameComponent> { name = "crop" }
-            with<TransformComponent> {
-                bounds.set(where)
-            }
-            with<RenderComponent> {
-                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("potato"))
-            }
-            with<CropComponent> { cropType = CropType.POTATOES }
+    private fun spawnKane(where: Vector2) {
+        val gridCells = buildCropGrid(Vector2(where.x, where.y), kane)
+        for (cell in gridCells) {
+            spawnCrop(cell, kane)
+        }
+    }
+
+    private fun spawnPotato(where: Vector2) {
+        val gridCells = buildCropGrid(Vector2(where.x, where.y), potato)
+        for (cell in gridCells) {
+            spawnCrop(cell, potato)
         }
     }
 }
