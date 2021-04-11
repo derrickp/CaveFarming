@@ -6,210 +6,217 @@ filter: Nearest, Nearest
 repeat: none
 big_demon_idle
   rotate: false
-  xy: 2, 19
+  xy: 2, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 4
 big_demon_idle
   rotate: false
-  xy: 74, 19
+  xy: 74, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 1
 big_demon_idle
   rotate: false
-  xy: 146, 19
+  xy: 146, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 3
 big_demon_idle
   rotate: false
-  xy: 218, 19
+  xy: 218, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 2
 big_demon_run
   rotate: false
-  xy: 38, 19
+  xy: 38, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 4
 big_demon_run
   rotate: false
-  xy: 110, 19
+  xy: 110, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 1
 big_demon_run
   rotate: false
-  xy: 182, 19
+  xy: 182, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 3
 big_demon_run
   rotate: false
-  xy: 254, 19
+  xy: 254, 22
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: 2
 big_zombie_idle
   rotate: false
-  xy: 326, 21
+  xy: 326, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 4
 big_zombie_idle
   rotate: false
-  xy: 362, 21
+  xy: 362, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 1
 big_zombie_idle
   rotate: false
-  xy: 434, 21
+  xy: 434, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 3
 big_zombie_idle
   rotate: false
-  xy: 506, 21
+  xy: 506, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 2
 big_zombie_run
   rotate: false
-  xy: 290, 21
+  xy: 290, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 1
 big_zombie_run
   rotate: false
-  xy: 398, 21
+  xy: 398, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 3
 big_zombie_run
   rotate: false
-  xy: 470, 21
+  xy: 470, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 2
 big_zombie_run
   rotate: false
-  xy: 542, 21
+  xy: 542, 24
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: 4
 hole
   rotate: false
-  xy: 22, 1
+  xy: 22, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 kane
   rotate: false
-  xy: 886, 39
+  xy: 922, 42
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 mushroom
   rotate: false
-  xy: 866, 39
+  xy: 902, 42
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 mushroom_spores
   rotate: false
-  xy: 2, 1
+  xy: 2, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 ogre_idle
   rotate: false
-  xy: 578, 23
+  xy: 578, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 ogre_idle
   rotate: false
-  xy: 650, 23
+  xy: 686, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 ogre_idle
   rotate: false
-  xy: 722, 23
+  xy: 758, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 ogre_idle
   rotate: false
-  xy: 830, 23
+  xy: 866, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 ogre_run
   rotate: false
-  xy: 614, 23
+  xy: 614, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 ogre_run
   rotate: false
-  xy: 686, 23
+  xy: 722, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 ogre_run
   rotate: false
-  xy: 758, 23
+  xy: 794, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 ogre_run
   rotate: false
-  xy: 794, 23
+  xy: 830, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 potato
   rotate: false
-  xy: 906, 39
+  xy: 942, 42
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
+shrooms
+  rotate: false
+  xy: 650, 26
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
 turnip
   rotate: false
-  xy: 42, 1
+  xy: 42, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
