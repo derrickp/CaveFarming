@@ -20,6 +20,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap
 
 const val GAME_WIDTH = 16f
 const val GAME_HEIGHT = 9f
+const val GROWING_INTERVAL = 1f
 
 /** [ktx.app.KtxGame] implementation shared by all platforms.  */
 class CaveFarming : KtxGame<KtxScreen>() {
