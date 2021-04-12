@@ -21,6 +21,7 @@ import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.systems.ActionsSystem
 import dev.plotsky.cavefarming.systems.CameraMoveSystem
+import dev.plotsky.cavefarming.systems.GrowthSystem
 import dev.plotsky.cavefarming.systems.InputSystem
 import dev.plotsky.cavefarming.systems.MoveSystem
 import dev.plotsky.cavefarming.systems.MovementDirectionSystem
@@ -95,6 +96,7 @@ class OverWorldScreen(
             addSystem(MoveSystem())
             addSystem(CameraMoveSystem(viewport))
             addSystem(ActionsSystem(engine, assetManager))
+            addSystem(GrowthSystem(assetManager))
             addSystem(RenderSystem(batch, viewport, map))
 //            addSystem(RenderSystem(hole, batch, font, camera))
             // add CollisionSystem last as it removes entities and this should always
