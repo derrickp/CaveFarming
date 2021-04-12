@@ -16,7 +16,7 @@ import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.crops.CropConfiguration
-import dev.plotsky.cavefarming.crops.CropConfigurations.buildCropGrid
+import dev.plotsky.cavefarming.crops.CropGrid.buildCropGrid
 import dev.plotsky.cavefarming.crops.CropConfigurations.kane
 import dev.plotsky.cavefarming.crops.CropConfigurations.mushroom
 import dev.plotsky.cavefarming.crops.CropConfigurations.potato
