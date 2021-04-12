@@ -14,5 +14,6 @@ class CropComponent : Component {
 
     var configuration: CropConfiguration = mushroom
     val growingBounds = Rectangle()
+    var ageTick = 0
     var growthStage = GrowthStage.SEED
 }
