@@ -1,219 +1,149 @@
 
 game.png
-size: 1024, 64
+size: 256, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-big_demon_idle
+block_goblin_other
   rotate: false
-  xy: 2, 22
-  size: 32, 36
-  orig: 32, 36
+  xy: 146, 30
+  size: 24, 24
+  orig: 24, 24
   offset: 0, 0
-  index: 4
-big_demon_idle
+  index: -1
+block_mushroom
   rotate: false
-  xy: 74, 22
-  size: 32, 36
-  orig: 32, 36
-  offset: 0, 0
-  index: 1
-big_demon_idle
-  rotate: false
-  xy: 146, 22
-  size: 32, 36
-  orig: 32, 36
-  offset: 0, 0
-  index: 3
-big_demon_idle
-  rotate: false
-  xy: 218, 22
-  size: 32, 36
-  orig: 32, 36
-  offset: 0, 0
-  index: 2
-big_demon_run
-  rotate: false
-  xy: 38, 22
-  size: 32, 36
-  orig: 32, 36
-  offset: 0, 0
-  index: 4
-big_demon_run
-  rotate: false
-  xy: 110, 22
-  size: 32, 36
-  orig: 32, 36
-  offset: 0, 0
-  index: 1
-big_demon_run
-  rotate: false
-  xy: 182, 22
-  size: 32, 36
-  orig: 32, 36
-  offset: 0, 0
-  index: 3
-big_demon_run
-  rotate: false
-  xy: 254, 22
-  size: 32, 36
-  orig: 32, 36
-  offset: 0, 0
-  index: 2
-big_zombie_idle
-  rotate: false
-  xy: 326, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 4
-big_zombie_idle
-  rotate: false
-  xy: 362, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 1
-big_zombie_idle
-  rotate: false
-  xy: 434, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 3
-big_zombie_idle
-  rotate: false
-  xy: 506, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 2
-big_zombie_run
-  rotate: false
-  xy: 290, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 1
-big_zombie_run
-  rotate: false
-  xy: 398, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 3
-big_zombie_run
-  rotate: false
-  xy: 470, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 2
-big_zombie_run
-  rotate: false
-  xy: 542, 24
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: 4
-hole
-  rotate: false
-  xy: 22, 2
+  xy: 2, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
+block_mushroom_other
+  rotate: false
+  xy: 70, 66
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+blocky_goblin
+  rotate: false
+  xy: 82, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+giant_mushroom
+  rotate: false
+  xy: 142, 94
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+giant_mushroom_spores
+  rotate: false
+  xy: 74, 22
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+goblin_big_hat
+  rotate: false
+  xy: 170, 58
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+goblin_left
+  rotate: false
+  xy: 178, 94
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+goblin_top_hat
+  rotate: false
+  xy: 134, 58
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+goblin_w_teeth_left
+  rotate: false
+  xy: 206, 58
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
 kane
   rotate: false
-  xy: 922, 42
+  xy: 194, 38
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
+kane_seeds
+  rotate: false
+  xy: 38, 26
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+kane_stalks
+  rotate: false
+  xy: 98, 58
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
 mushroom
   rotate: false
-  xy: 902, 42
+  xy: 22, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 mushroom_spores
   rotate: false
-  xy: 2, 2
+  xy: 174, 38
   size: 16, 16
   orig: 16, 16
-  offset: 0, 0
-  index: 1
-ogre_idle
-  rotate: false
-  xy: 578, 26
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 1
-ogre_idle
-  rotate: false
-  xy: 686, 26
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 3
-ogre_idle
-  rotate: false
-  xy: 758, 26
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 2
-ogre_idle
-  rotate: false
-  xy: 866, 26
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 4
-ogre_run
-  rotate: false
-  xy: 614, 26
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 3
-ogre_run
-  rotate: false
-  xy: 722, 26
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 2
-ogre_run
-  rotate: false
-  xy: 794, 26
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 4
-ogre_run
-  rotate: false
-  xy: 830, 26
-  size: 32, 32
-  orig: 32, 32
   offset: 0, 0
   index: 1
 potato
   rotate: false
-  xy: 942, 42
+  xy: 62, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
+potato_seeds
+  rotate: false
+  xy: 2, 26
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potatoes
+  rotate: false
+  xy: 214, 94
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 shrooms
   rotate: false
-  xy: 650, 26
+  xy: 70, 94
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
+super_big_goblin
+  rotate: false
+  xy: 2, 62
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 turnip
   rotate: false
   xy: 42, 2
@@ -221,3 +151,17 @@ turnip
   orig: 16, 16
   offset: 0, 0
   index: 1
+turnip_seed
+  rotate: false
+  xy: 110, 22
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+turnip_top
+  rotate: false
+  xy: 106, 94
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
