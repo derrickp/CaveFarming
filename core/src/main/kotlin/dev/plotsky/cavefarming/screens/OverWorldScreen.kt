@@ -72,13 +72,14 @@ class OverWorldScreen(
             with<TransformComponent> {
                 bounds.x = GAME_WIDTH / 2
                 bounds.y = GAME_HEIGHT / 2
-                bounds.width = 1f
-                bounds.height = 1f
+                bounds.width = 1.25f
+                bounds.height = 1.25f
             }
             with<InputComponent>()
             with<InventoryComponent>()
             with<RenderComponent> {
-                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("ogre_idle"))
+                sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("goblin_big_hat"))
+                z = 10
             }
             with<CharacterComponent>()
         }

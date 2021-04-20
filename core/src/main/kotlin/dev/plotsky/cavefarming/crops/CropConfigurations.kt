@@ -5,8 +5,8 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(3, 3),
             areaNeededPerCrop = Pair(1f, 1f),
-            seedRegionName = "mushroom_spores",
-            cropRegionName = "mushroom",
+            seedRegionName = "giant_mushroom_spores",
+            cropRegionName = "giant_mushroom",
             growingSeasonLength = 10,
             chanceGrowAfterSeason = 0.95f,
             tooOldSeasonLength = 20,
@@ -19,8 +19,8 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(5, 3),
             areaNeededPerCrop = Pair(2f, 2f),
-            seedRegionName = "kane",
-            cropRegionName = "kane",
+            seedRegionName = "kane_seeds",
+            cropRegionName = "kane_stalks",
             growingSeasonLength = 5,
             chanceGrowAfterSeason = 0.90f,
             tooOldSeasonLength = 15,
@@ -33,8 +33,8 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(1, 1),
             areaNeededPerCrop = Pair(1f, 1f),
-            seedRegionName = "turnip",
-            cropRegionName = "turnip",
+            seedRegionName = "turnip_seed",
+            cropRegionName = "turnip_top",
             growingSeasonLength = 15,
             chanceGrowAfterSeason = 0.85f,
             tooOldSeasonLength = 10,
@@ -47,8 +47,8 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(1, 3),
             areaNeededPerCrop = Pair(1f, 1f),
-            seedRegionName = "potato",
-            cropRegionName = "potato",
+            seedRegionName = "potato_seeds",
+            cropRegionName = "potatoes",
             growingSeasonLength = 10,
             chanceGrowAfterSeason = 0.90f,
             tooOldSeasonLength = 30,

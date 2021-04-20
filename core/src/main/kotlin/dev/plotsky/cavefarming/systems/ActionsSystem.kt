@@ -85,14 +85,15 @@ class ActionsSystem(
                     Rectangle(
                         where.x,
                         where.y,
-                        0.6f,
-                        0.6f
+                        1f,
+                        1f
                     )
                 )
             }
             val region = assetManager[TextureAtlasAssets.CaveFarming].findRegion(configuration.seedRegionName)
             with<RenderComponent> {
                 sprite.setRegion(region)
+                z = 1
             }
             with<CropComponent> {
                 this.configuration = configuration
