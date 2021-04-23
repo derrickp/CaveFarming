@@ -17,6 +17,4 @@ class MoveComponent : Component {
     companion object {
         val mapper = mapperFor<MoveComponent>()
     }
-
-    val speed = Vector2()
 }
