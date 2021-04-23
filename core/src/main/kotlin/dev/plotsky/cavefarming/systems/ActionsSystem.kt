@@ -16,11 +16,11 @@ import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.crops.CropConfiguration
-import dev.plotsky.cavefarming.crops.CropGrid.buildCropGrid
 import dev.plotsky.cavefarming.crops.CropConfigurations.kane
 import dev.plotsky.cavefarming.crops.CropConfigurations.mushroom
 import dev.plotsky.cavefarming.crops.CropConfigurations.potato
 import dev.plotsky.cavefarming.crops.CropConfigurations.turnip
+import dev.plotsky.cavefarming.crops.CropGrid.buildCropGrid
 import dev.plotsky.cavefarming.crops.CropType
 import dev.plotsky.cavefarming.crops.GrowthStage
 import ktx.ashley.allOf

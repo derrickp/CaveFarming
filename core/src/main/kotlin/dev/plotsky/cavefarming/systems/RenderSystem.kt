@@ -4,14 +4,14 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.SortedIteratingSystem
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.utils.viewport.Viewport
+import dev.plotsky.cavefarming.components.Box2DComponent
 import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import ktx.ashley.allOf
 import ktx.ashley.get
 import ktx.graphics.use
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
-import dev.plotsky.cavefarming.components.Box2DComponent
 
 class RenderSystem(
     private val batch: Batch,

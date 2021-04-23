@@ -27,7 +27,6 @@ class ChooseCropSystem : IteratingSystem(
                     it.currentCrop = it.crops[FOURTH_CROP_INDEX]
                 }
             }
-
         }
     }
 

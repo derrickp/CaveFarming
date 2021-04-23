@@ -6,12 +6,12 @@ import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.maps.tiled.TiledMap
 import dev.plotsky.cavefarming.CaveFarming
 import dev.plotsky.cavefarming.assets.TextureAtlasAssets
 import dev.plotsky.cavefarming.assets.load
 import ktx.app.KtxScreen
 import ktx.graphics.use
-import com.badlogic.gdx.maps.tiled.TiledMap
 
 class LoadingScreen(
     private val caveFarming: CaveFarming,
