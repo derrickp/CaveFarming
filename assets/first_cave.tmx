@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="9">
  <tileset firstgid="1" source="floor.tsx"/>
- <layer id="1" name="Tile Layer 1" width="80" height="45">
+ <layer id="1" name="Tile Layer 1" width="80" height="45" locked="1">
   <data encoding="csv">
 10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,
 10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,
@@ -50,4 +50,17 @@
 10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10
 </data>
  </layer>
+ <objectgroup id="3" name="Border Collision">
+  <properties>
+   <property name="collisionLayer" value="true"/>
+  </properties>
+  <object id="2" x="-30.1587" y="-1.6127" width="26.9403" height="720.66"/>
+  <object id="6" x="-0.645078" y="720.23" width="1296.14" height="17.4171">
+   <properties>
+    <property name="collisionLayer" value="true"/>
+   </properties>
+  </object>
+  <object id="7" x="-0.245592" y="-34.9" width="1283.71" height="33.856"/>
+  <object id="8" x="1288.38" y="-3.29211" width="18.8275" height="738.479"/>
+ </objectgroup>
 </map>
