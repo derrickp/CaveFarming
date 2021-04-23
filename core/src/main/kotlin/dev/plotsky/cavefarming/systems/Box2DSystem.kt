@@ -13,7 +13,7 @@ import kotlin.math.min
 class Box2DSystem(
     private val world: World,
 ) : IteratingSystem(allOf(Box2DComponent::class, TransformComponent::class).get()) {
-    private var accumulator = 0f
+    private var accumulator = STARTING_ACCUMULATOR
 
     /**
      * Updates the [world] using a fixed time step of deltaTime
@@ -23,10 +23,10 @@ class Box2DSystem(
             world.autoClearForces = false
         }
 
-        accumulator += min(1 / 15f, deltaTime)
+        accumulator += min(ACCUMULATOR_MIN_NUMERATOR / ACCUMULATOR_MIN_DENOMINATOR, deltaTime)
         while (accumulator >= deltaTime) {
             updatePrevPositionAndApplyForces()
-            world.step(deltaTime, 6, 2)
+            world.step(deltaTime, VELOCITY_ITERATIONS, POSITION_ITERATIONS)
             accumulator -= deltaTime
         }
         world.clearForces()
@@ -42,8 +42,8 @@ class Box2DSystem(
         entities.forEach { entity ->
             val transformCmp = entity[TransformComponent.mapper]!!
             val box2dCmp = entity[Box2DComponent.mapper]!!
-            val halfW = transformCmp.bounds.width * 0.5f
-            val halfH = transformCmp.bounds.height * 0.5f
+            val halfW = transformCmp.bounds.width * HALF
+            val halfH = transformCmp.bounds.height * HALF
             val body = box2dCmp.body
 
             transformCmp.bounds.x = body.position.x - halfW
@@ -53,7 +53,7 @@ class Box2DSystem(
                 // apply non-zero impulse once before a call to world.step
 //                body.applyForceToCenter(box2dCmp.impulse, true)
                 body.applyLinearImpulse(box2dCmp.impulse, body.worldCenter, true)
-                box2dCmp.impulse.set(0f, 0f)
+                box2dCmp.impulse.set(ZERO, ZERO)
             }
         }
     }
@@ -65,8 +65,8 @@ class Box2DSystem(
         entities.forEach { entity ->
             val transformCmp = entity[TransformComponent.mapper]!!
             val box2dCmp = entity[Box2DComponent.mapper]!!
-            val halfW = transformCmp.bounds.width * 0.5f
-            val halfH = transformCmp.bounds.height * 0.5f
+            val halfW = transformCmp.bounds.width * HALF
+            val halfH = transformCmp.bounds.height * HALF
             val body = box2dCmp.body
 
             // transform position contains the previous position of the body before world.step.
@@ -86,4 +86,14 @@ class Box2DSystem(
     }
 
     override fun processEntity(entity: Entity?, deltaTime: Float) = Unit
+
+    companion object {
+        private const val STARTING_ACCUMULATOR = 0f
+        private const val ACCUMULATOR_MIN_DENOMINATOR = 15f
+        private const val ACCUMULATOR_MIN_NUMERATOR = 1f
+        private const val HALF = 0.5f
+        private const val ZERO = 0f
+        private const val VELOCITY_ITERATIONS = 6
+        private const val POSITION_ITERATIONS = 2
+    }
 }

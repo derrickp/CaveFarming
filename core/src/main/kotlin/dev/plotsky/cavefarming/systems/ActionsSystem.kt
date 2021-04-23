@@ -132,6 +132,13 @@ class ActionsSystem(
     }
 
     private fun isOutOfBounds(where: Vector2): Boolean {
-        return where.x < 0 || where.x > 39 || where.y < 0 || where.y > 21.75
+        return where.x < MIN_X || where.x > MAX_X || where.y < MIN_Y || where.y > MAX_Y
+    }
+
+    companion object {
+        private const val MIN_X = 0
+        private const val MAX_X = 39
+        private const val MIN_Y = 0
+        private const val MAX_Y = 21.75
     }
 }

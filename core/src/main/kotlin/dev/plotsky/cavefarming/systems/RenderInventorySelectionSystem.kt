@@ -19,11 +19,23 @@ class RenderInventorySelectionSystem(
         entity[InventoryComponent.mapper]?.let { inventory ->
             batch.use {
                 inventory.crops.withIndex().forEach { crop ->
-                    font.draw(it, "${crop.index + 1}: ${crop.value}", 100f, 400f - crop.index * 20f)
+                    font.draw(
+                        it,
+                        "${crop.index + ONE}: ${crop.value}",
+                        CROP_TEXT_X,
+                        CROP_TEXT_Y - crop.index * CROP_TEXT_Y_MODIFIER
+                    )
                 }
-                font.draw(it, "Current: ${inventory.currentCrop}", 100f, 200f)
+                font.draw(it, "Current: ${inventory.currentCrop}", CROP_TEXT_X, CURRENT_CROP_Y)
             }
         }
     }
 
+    companion object {
+        private const val ONE = 1
+        private const val CROP_TEXT_X = 100f
+        private const val CROP_TEXT_Y = 400f
+        private const val CROP_TEXT_Y_MODIFIER = 20f
+        private const val CURRENT_CROP_Y = 200f
+    }
 }

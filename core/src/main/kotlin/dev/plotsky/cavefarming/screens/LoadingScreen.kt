@@ -33,22 +33,22 @@ class LoadingScreen(
             font.draw(
                 it,
                 "[GOLDENROD]Welcome to Cave Farming!",
-                camera.position.x - 75f,
-                Gdx.graphics.height - 150f
+                camera.position.x - TITLE_X,
+                Gdx.graphics.height - TITLE_Y
             )
             if (assetManager.isFinished) {
                 font.draw(
                     it,
                     "[GOLDENROD]Press Enter or click the screen to begin",
-                    camera.position.x - 100f,
-                    Gdx.graphics.height - 200f
+                    camera.position.x - LOADED_X,
+                    Gdx.graphics.height - LOADED_Y
                 )
             } else {
                 font.draw(
                     it,
                     "[GOLDENROD]Loading...",
-                    camera.position.x - 25f,
-                    Gdx.graphics.height - 200f
+                    camera.position.x - LOADING_X,
+                    Gdx.graphics.height - LOADING_Y
                 )
             }
         }
@@ -60,5 +60,14 @@ class LoadingScreen(
         }
 
         super.render(delta)
+    }
+
+    companion object {
+        private const val TITLE_X = 75f
+        private const val TITLE_Y = 150f
+        private const val LOADED_X = 100f
+        private const val LOADED_Y = 200f
+        private const val LOADING_X = 25f
+        private const val LOADING_Y = 200f
     }
 }

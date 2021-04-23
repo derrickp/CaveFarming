@@ -54,8 +54,8 @@ class GrowthSystem(private val assetManager: AssetManager) : IntervalSystem(
 
         val sproutIndex = Random.nextInt(sprouts.size)
         val sprout = sprouts.get(index = sproutIndex)
-        val cropComponent = sprout[CropComponent.mapper] ?: return
-        val renderComponent = sprout[RenderComponent.mapper] ?: return
+        val cropComponent = sprout[CropComponent.mapper]!!
+        val renderComponent = sprout[RenderComponent.mapper]!!
 
         growCrop(cropComponent, renderComponent)
     }

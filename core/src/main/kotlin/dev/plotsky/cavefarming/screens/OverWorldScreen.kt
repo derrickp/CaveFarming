@@ -57,7 +57,7 @@ class OverWorldScreen(
     private val world = World(Vector2.Zero, true).apply {
         autoClearForces = false
     }
-    private val unitScale = 1 / 32f
+    private val unitScale = ONE / SCALE_DENOMINATOR
     private val map: TiledMap by lazy {
         assetManager.get("first_cave.tmx")
     }
@@ -75,7 +75,7 @@ class OverWorldScreen(
         super.resize(width, height)
     }
     override fun render(delta: Float) {
-        viewport.camera.position.set(GAME_WIDTH / 2, GAME_HEIGHT / 2, 0f)
+        viewport.camera.position.set(GAME_WIDTH / TWO, GAME_HEIGHT / TWO, ZERO.toFloat())
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             removeSystems()
             caveFarming.setScreen<InventoryScreen>()
@@ -87,11 +87,11 @@ class OverWorldScreen(
 
     override fun show() {
         // initialize entity engine
-        if (engine.entities.size() == 0) {
+        if (engine.entities.size() == ZERO) {
             addMainCharacter()
         }
 
-        if (engine.systems.size() == 0) {
+        if (engine.systems.size() == ZERO) {
             addSystems()
         }
 
@@ -104,16 +104,16 @@ class OverWorldScreen(
         engine.entity {
             with<Box2DComponent> {
                 body = world.body(BodyDef.BodyType.DynamicBody) {
-                    position.set(GAME_WIDTH / 2 + 1.25f * 0.5f, GAME_HEIGHT / 2 + 1.25f * 0.5f)
+                    position.set(GAME_WIDTH / TWO + ONE_QUARTER * HALF, GAME_HEIGHT / TWO + ONE_QUARTER * HALF)
                     fixedRotation = false
                     allowSleep = true
 
                     box(
-                        1.25f,
-                        1.25f,
-                        Box2DComponent.TMP_VECTOR2.set(0f, -1.25f * 0.5f + 1.25f * 0.5f)
+                        ONE_QUARTER,
+                        ONE_QUARTER,
+                        Box2DComponent.TMP_VECTOR2.set(ZERO.toFloat(), -ONE_QUARTER * HALF + ONE_QUARTER * HALF)
                     ) {
-                        friction = 0f
+                        friction = ZERO.toFloat()
                         isSensor = false
                     }
 
@@ -128,15 +128,15 @@ class OverWorldScreen(
             with<NameComponent> { name = "goblin" }
             with<MoveComponent>()
             with<TransformComponent> {
-                bounds.x = GAME_WIDTH / 2
-                bounds.y = GAME_HEIGHT / 2
-                bounds.width = 1.25f
-                bounds.height = 1.25f
+                bounds.x = GAME_WIDTH / TWO
+                bounds.y = GAME_HEIGHT / TWO
+                bounds.width = ONE_QUARTER
+                bounds.height = ONE_QUARTER
             }
             with<InventoryComponent>()
             with<RenderComponent> {
                 sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("goblin_big_hat"))
-                z = 10
+                z = CHARACTER_Z_LEVEL
             }
             with<CharacterComponent>()
         }
@@ -196,23 +196,23 @@ class OverWorldScreen(
                         val width = shape.width * unitScale
                         val height = shape.height * unitScale
 
-                        if (width <= 0f || height <= 0f) {
+                        if (width <= ZERO.toFloat() || height <= ZERO.toFloat()) {
                             return@forEach
                         }
 
                         // define loop vertices
                         // bottom left corner
-                        TMP_RECTANGLE_VERTICES[0] = x
-                        TMP_RECTANGLE_VERTICES[1] = y
+                        TMP_RECTANGLE_VERTICES[BOTTOM_LEFT_X] = x
+                        TMP_RECTANGLE_VERTICES[BOTTOM_LEFT_Y] = y
                         // top left corner
-                        TMP_RECTANGLE_VERTICES[2] = x
-                        TMP_RECTANGLE_VERTICES[3] = y + height
+                        TMP_RECTANGLE_VERTICES[TOP_LEFT_X] = x
+                        TMP_RECTANGLE_VERTICES[TOP_LEFT_Y] = y + height
                         // top right corner
-                        TMP_RECTANGLE_VERTICES[4] = x + width
-                        TMP_RECTANGLE_VERTICES[5] = y + height
+                        TMP_RECTANGLE_VERTICES[TOP_RIGHT_X] = x + width
+                        TMP_RECTANGLE_VERTICES[TOP_RIGHT_Y] = y + height
                         // bottom right corner
-                        TMP_RECTANGLE_VERTICES[6] = x + width
-                        TMP_RECTANGLE_VERTICES[7] = y
+                        TMP_RECTANGLE_VERTICES[BOTTOM_RIGHT_X] = x + width
+                        TMP_RECTANGLE_VERTICES[BOTTOM_RIGHT_Y] = y
 
                         loop(TMP_RECTANGLE_VERTICES)
                     }
@@ -223,5 +223,21 @@ class OverWorldScreen(
 
     companion object {
         private val TMP_RECTANGLE_VERTICES = FloatArray(8)
+        private const val ONE = 1f
+        private const val TWO = 2f
+        private const val ZERO = 0
+        private const val HALF = 0.5f
+        private const val ONE_QUARTER = 1.25f
+        private const val SCALE_DENOMINATOR = 32f
+        private const val CHARACTER_Z_LEVEL = 10
+
+        private const val BOTTOM_LEFT_X = 0
+        private const val BOTTOM_LEFT_Y = 1
+        private const val TOP_LEFT_X = 2
+        private const val TOP_LEFT_Y = 3
+        private const val TOP_RIGHT_X = 4
+        private const val TOP_RIGHT_Y = 5
+        private const val BOTTOM_RIGHT_X = 6
+        private const val BOTTOM_RIGHT_Y = 7
     }
 }

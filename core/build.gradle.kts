@@ -7,6 +7,7 @@ plugins {
     kotlin("jvm")
     `java-library`
     idea
+    id("io.gitlab.arturbosch.detekt")
 }
 
 java {

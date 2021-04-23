@@ -23,7 +23,7 @@ class InventoryScreen(
         camera.update()
         // everything is now done within our entity engine --> update it every frame
         batch.use(camera) {
-            font.draw(it, "INVENTORY", 50f, 50f)
+            font.draw(it, "INVENTORY", FONT_SIZE, FONT_SIZE)
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
@@ -44,5 +44,9 @@ class InventoryScreen(
             addSystem(ChooseCropSystem())
             addSystem(RenderInventorySelectionSystem(batch, font))
         }
+    }
+
+    companion object {
+        private const val FONT_SIZE = 50f
     }
 }

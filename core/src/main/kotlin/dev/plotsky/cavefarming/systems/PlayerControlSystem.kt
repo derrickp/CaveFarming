@@ -16,6 +16,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan2
 
+@Suppress("TooManyFunctions") // Yeah... I know
 class PlayerControlSystem : InputProcessor,
     IteratingSystem(allOf(CharacterComponent::class).get()) {
     private var valueLeftX = 0f
@@ -45,13 +46,13 @@ class PlayerControlSystem : InputProcessor,
 
     override fun keyDown(keycode: Int): Boolean {
         when (keycode) {
-            Input.Keys.RIGHT -> updateMovementValues(1f, valueLeftY)
-            Input.Keys.LEFT -> updateMovementValues(-1f, valueLeftY)
-            Input.Keys.UP -> updateMovementValues(valueLeftX, -1f)
-            Input.Keys.DOWN -> updateMovementValues(valueLeftX, 1f)
+            Input.Keys.RIGHT -> updateMovementValues(MOVE_RIGHT, valueLeftY)
+            Input.Keys.LEFT -> updateMovementValues(MOVE_LEFT, valueLeftY)
+            Input.Keys.UP -> updateMovementValues(valueLeftX, MOVE_UP)
+            Input.Keys.DOWN -> updateMovementValues(valueLeftX, MOVE_DOWN)
             Input.Keys.SPACE -> actionPressed = true
             Input.Keys.I -> {
-                updateMovementValues(0f, 0f)
+                updateMovementValues(NO_MOVE, NO_MOVE)
             }
             else -> return false
         }
@@ -63,30 +64,30 @@ class PlayerControlSystem : InputProcessor,
         when (keycode) {
             Input.Keys.RIGHT -> {
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                    updateMovementValues(-1f, valueLeftY)
+                    updateMovementValues(MOVE_LEFT, valueLeftY)
                 } else {
-                    updateMovementValues(0f, valueLeftY)
+                    updateMovementValues(NO_MOVE, valueLeftY)
                 }
             }
             Input.Keys.LEFT -> {
                 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                    updateMovementValues(1f, valueLeftY)
+                    updateMovementValues(MOVE_RIGHT, valueLeftY)
                 } else {
-                    updateMovementValues(0f, valueLeftY)
+                    updateMovementValues(NO_MOVE, valueLeftY)
                 }
             }
             Input.Keys.UP -> {
                 if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                    updateMovementValues(valueLeftX, 1f)
+                    updateMovementValues(valueLeftX, MOVE_DOWN)
                 } else {
-                    updateMovementValues(valueLeftX, 0f)
+                    updateMovementValues(valueLeftX, NO_MOVE)
                 }
             }
             Input.Keys.DOWN -> {
                 if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                    updateMovementValues(valueLeftX, -1f)
+                    updateMovementValues(valueLeftX, MOVE_UP)
                 } else {
-                    updateMovementValues(valueLeftX, 0f)
+                    updateMovementValues(valueLeftX, NO_MOVE)
                 }
             }
             Input.Keys.SPACE -> actionPressed = false
@@ -112,7 +113,7 @@ class PlayerControlSystem : InputProcessor,
         valueLeftX = newX
         valueLeftY = newY
         stopMovement = abs(valueLeftX) <= AXIS_DEAD_ZONE && abs(valueLeftY) <= AXIS_DEAD_ZONE
-        moveDirectionDeg = atan2(-valueLeftY, valueLeftX) * 180f / PI.toFloat()
+        moveDirectionDeg = atan2(-valueLeftY, valueLeftX) * MOVE_DIRECTION_SPIN / PI.toFloat()
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
@@ -141,5 +142,11 @@ class PlayerControlSystem : InputProcessor,
 
     companion object {
         private const val AXIS_DEAD_ZONE = 0.25f
+        private const val MOVE_DIRECTION_SPIN = 180f
+        private const val MOVE_RIGHT = 1f
+        private const val MOVE_LEFT = -1f
+        private const val MOVE_DOWN = 1f
+        private const val MOVE_UP = -1f
+        private const val NO_MOVE = 0f
     }
 }
