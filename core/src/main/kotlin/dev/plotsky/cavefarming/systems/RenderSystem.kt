@@ -12,6 +12,7 @@ import ktx.ashley.allOf
 import ktx.ashley.get
 import ktx.graphics.use
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
+import dev.plotsky.cavefarming.components.Box2DComponent
 
 class RenderSystem(
     private val batch: Batch,
@@ -38,13 +39,23 @@ class RenderSystem(
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val transform = entity[TransformComponent.mapper]!!
         val render = entity[RenderComponent.mapper]!!
+        val box2dCmp = entity[Box2DComponent.mapper]
         render.sprite.run {
+            if (box2dCmp != null) {
+                setBounds(
+                    box2dCmp.renderPosition.x,
+                    box2dCmp.renderPosition.y,
+                    transform.bounds.width,
+                    transform.bounds.height
+                )
+            } else {
             setBounds(
                 transform.bounds.x,
                 transform.bounds.y,
                 transform.bounds.width,
                 transform.bounds.height
             )
+            }
             draw(batch)
         }
     }

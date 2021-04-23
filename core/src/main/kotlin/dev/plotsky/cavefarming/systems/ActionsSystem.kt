@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2
 import dev.plotsky.cavefarming.assets.TextureAtlasAssets
 import dev.plotsky.cavefarming.assets.get
 import dev.plotsky.cavefarming.components.CropComponent
-import dev.plotsky.cavefarming.components.InputComponent
+import dev.plotsky.cavefarming.components.InteractComponent
 import dev.plotsky.cavefarming.components.InventoryComponent
 import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.RenderComponent
@@ -23,7 +23,6 @@ import dev.plotsky.cavefarming.crops.CropConfigurations.potato
 import dev.plotsky.cavefarming.crops.CropConfigurations.turnip
 import dev.plotsky.cavefarming.crops.CropType
 import dev.plotsky.cavefarming.crops.GrowthStage
-import dev.plotsky.cavefarming.inputs.InteractionInput
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.get
@@ -33,16 +32,17 @@ class ActionsSystem(
     private val engine: PooledEngine,
     private val assetManager: AssetManager
 ) : IteratingSystem(
-    allOf(InputComponent::class, TransformComponent::class, InventoryComponent::class).get()
+    allOf(InteractComponent::class, TransformComponent::class, InventoryComponent::class).get()
 ) {
     private val cropFamily: Family by lazy {
         Family.all(CropComponent::class.java).get()
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        entity[InputComponent.mapper]?.let { input ->
-            if (input.interactionKeys.contains(InteractionInput.SPACE)) {
+        entity[InteractComponent.mapper]?.let { interact ->
+            if (interact.interact) {
                 handlePressedPlantCrop(entity)
+                interact.interact = false
             }
         }
     }
