@@ -23,7 +23,7 @@ class Box2DSystem(
             world.autoClearForces = false
         }
 
-        accumulator += min(1 / 30f, deltaTime)
+        accumulator += min(1 / 15f, deltaTime)
         while (accumulator >= deltaTime) {
             updatePrevPositionAndApplyForces()
             world.step(deltaTime, 6, 2)

@@ -1,6 +1,5 @@
 package dev.plotsky.cavefarming.screens
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
@@ -114,7 +113,7 @@ class OverWorldScreen(
                         1.25f,
                         Box2DComponent.TMP_VECTOR2.set(0f, -1.25f * 0.5f + 1.25f * 0.5f)
                     ) {
-                        friction = 0.25f
+                        friction = 0f
                         isSensor = false
                     }
 
@@ -166,11 +165,11 @@ class OverWorldScreen(
 
     private fun parseMapLayers() {
         map.forEachLayer<MapLayer> {
-            createCollisionBody(engine, it)
+            createCollisionBody(it)
         }
     }
 
-    private fun createCollisionBody(engine: Engine, layer: MapLayer) {
+    private fun createCollisionBody(layer: MapLayer) {
         val objects = layer.objects
         if (objects.isEmpty()) {
             return
