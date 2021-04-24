@@ -9,7 +9,7 @@ object CropConfigurations {
 
     private const val MUSHROOM_SEASON_LENGTH = 10
     private const val MUSHROOM_OLD_SEASON_LENGTH = 20
-    private const val MUSHROOM_GROW_CHANCE = 0.95f
+    private const val MUSHROOM_GROW_CHANCE = 0.75f
     private const val MUSHROOM_DIE_TOO_OLD = 0.05f
     val mushroom by lazy {
         CropConfiguration(
@@ -27,7 +27,7 @@ object CropConfigurations {
 
     private const val KANE_SEASON_LENGTH = 5
     private const val KANE_OLD_SEASON_LENGTH = 15
-    private const val KANE_GROW_CHANCE = 0.90f
+    private const val KANE_GROW_CHANCE = 0.70f
     private const val KANE_DIE_TOO_OLD = 0.10f
     val kane by lazy {
         CropConfiguration(
@@ -45,7 +45,7 @@ object CropConfigurations {
 
     private const val TURNIP_SEASON_LENGTH = 15
     private const val TURNIP_OLD_SEASON_LENGTH = 10
-    private const val TURNIP_GROW_CHANCE = 0.85f
+    private const val TURNIP_GROW_CHANCE = 0.65f
     private const val TURNIP_DIE_TOO_OLD = 0.20f
     val turnip by lazy {
         CropConfiguration(
@@ -63,7 +63,7 @@ object CropConfigurations {
 
     private const val POTATO_SEASON_LENGTH = 10
     private const val POTATO_OLD_SEASON_LENGTH = 30
-    private const val POTATO_GROW_CHANCE = 0.90f
+    private const val POTATO_GROW_CHANCE = 0.70f
     private const val POTATO_DIE_TOO_OLD = 0.05f
     val potato by lazy {
         CropConfiguration(
