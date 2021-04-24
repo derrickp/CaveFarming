@@ -15,6 +15,6 @@ class CameraMoveSystem(
 ) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val transform = entity[TransformComponent.mapper]!!
-        viewport.camera.position.set(transform.bounds.x, transform.bounds.y, 0f)
+        viewport.camera.position.set(transform.position.x, transform.position.y, 0f)
     }
 }

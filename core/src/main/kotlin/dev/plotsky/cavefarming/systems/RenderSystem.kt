@@ -41,15 +41,15 @@ class RenderSystem(
                 setBounds(
                     box2dCmp.renderPosition.x,
                     box2dCmp.renderPosition.y,
-                    transform.bounds.width,
-                    transform.bounds.height
+                    transform.size.x,
+                    transform.size.y
                 )
             } else {
                 setBounds(
-                    transform.bounds.x,
-                    transform.bounds.y,
-                    transform.bounds.width,
-                    transform.bounds.height
+                    transform.position.x,
+                    transform.position.y,
+                    transform.size.x,
+                    transform.size.y
                 )
             }
             draw(batch)

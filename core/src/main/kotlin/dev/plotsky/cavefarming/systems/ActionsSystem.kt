@@ -49,7 +49,7 @@ class ActionsSystem(
 
     private fun handlePressedPlantCrop(entity: Entity) {
         entity[TransformComponent.mapper]?.let { transform ->
-            val where = Vector2(transform.bounds.x, transform.bounds.y)
+            val where = Vector2(transform.position.x, transform.position.y)
 
             when (entity[InventoryComponent.mapper]!!.currentCrop) {
                 CropType.MUSHROOMS -> spawnMushroom(where)
@@ -81,14 +81,8 @@ class ActionsSystem(
         engine.entity {
             with<NameComponent> { name = "crop" }
             with<TransformComponent> {
-                bounds.set(
-                    Rectangle(
-                        where.x,
-                        where.y,
-                        1f,
-                        1f
-                    )
-                )
+                position.set(where, 0f)
+                size.set(1f, 1f)
             }
             val region = assetManager[TextureAtlasAssets.CaveFarming].findRegion(configuration.seedRegionName)
             with<RenderComponent> {

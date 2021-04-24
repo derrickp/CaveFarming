@@ -128,10 +128,12 @@ class OverWorldScreen(
             with<NameComponent> { name = "goblin" }
             with<MoveComponent>()
             with<TransformComponent> {
-                bounds.x = GAME_WIDTH / TWO
-                bounds.y = GAME_HEIGHT / TWO
-                bounds.width = ONE_QUARTER
-                bounds.height = ONE_QUARTER
+                position.set(
+                    GAME_WIDTH / TWO,
+                    GAME_HEIGHT / TWO,
+                    0f
+                )
+                size.set(ONE_QUARTER, ONE_QUARTER)
             }
             with<InventoryComponent>()
             with<RenderComponent> {

@@ -35,19 +35,19 @@ class Box2DSystem(
     }
 
     /**
-     * Applies an impulse once to all entities and updates their [TransformComponent.bounds] to the position
+     * Applies an impulse once to all entities and updates their [TransformComponent.position] to the position
      * before calling [World.step].
      */
     private fun updatePrevPositionAndApplyForces() {
         entities.forEach { entity ->
             val transformCmp = entity[TransformComponent.mapper]!!
             val box2dCmp = entity[Box2DComponent.mapper]!!
-            val halfW = transformCmp.bounds.width * HALF
-            val halfH = transformCmp.bounds.height * HALF
+            val halfW = transformCmp.size.x * HALF
+            val halfH = transformCmp.size.y * HALF
             val body = box2dCmp.body
 
-            transformCmp.bounds.x = body.position.x - halfW
-            transformCmp.bounds.y = body.position.y - halfH
+            transformCmp.position.x = body.position.x - halfW
+            transformCmp.position.y = body.position.y - halfH
 
             if (!box2dCmp.impulse.isZero) {
                 // apply non-zero impulse once before a call to world.step
@@ -65,23 +65,20 @@ class Box2DSystem(
         entities.forEach { entity ->
             val transformCmp = entity[TransformComponent.mapper]!!
             val box2dCmp = entity[Box2DComponent.mapper]!!
-            val halfW = transformCmp.bounds.width * HALF
-            val halfH = transformCmp.bounds.height * HALF
+            val halfW = transformCmp.size.x * HALF
+            val halfH = transformCmp.size.y * HALF
             val body = box2dCmp.body
 
             // transform position contains the previous position of the body before world.step.
             // we use it for the interpolation for the render position
-            box2dCmp.renderPosition.x = MathUtils.lerp(transformCmp.bounds.x, body.position.x - halfW, alpha)
-            box2dCmp.renderPosition.y = MathUtils.lerp(transformCmp.bounds.y, body.position.y - halfH, alpha)
+            box2dCmp.renderPosition.x = MathUtils.lerp(transformCmp.position.x, body.position.x - halfW, alpha)
+            box2dCmp.renderPosition.y = MathUtils.lerp(transformCmp.position.y, body.position.y - halfH, alpha)
 
-            transformCmp.bounds.x = body.position.x - halfW
-            transformCmp.bounds.y = body.position.y - halfH
-            // update transform position to correct body position
-//            transformCmp.position.set(
-//                body.position.x - halfW,
-//                body.position.y - halfH,
-//                transformCmp.position.z,
-//            )
+            transformCmp.position.set(
+                body.position.x - halfW,
+                body.position.y - halfH,
+                transformCmp.position.z
+            )
         }
     }
 
