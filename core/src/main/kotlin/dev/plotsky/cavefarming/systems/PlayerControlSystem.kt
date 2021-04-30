@@ -99,7 +99,12 @@ class PlayerControlSystem : InputProcessor,
 
     override fun keyTyped(character: Char) = false
 
-    override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int) = false
+    override fun touchDown(
+        screenX: Int,
+        screenY: Int,
+        pointer: Int,
+        button: Int
+    ) = false
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int) = false
 
