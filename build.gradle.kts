@@ -1,11 +1,4 @@
 buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-        maven("https://oss.sonatype.org/content/repositories/snapshots/")
-    }
     dependencies {
         val kotlinVersion: String by project
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
@@ -18,7 +11,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint").version("10.0.0")
 }
 
-subprojects {
+allprojects {
     version = "0.0.1"
     repositories {
         mavenLocal()
