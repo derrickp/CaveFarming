@@ -133,7 +133,7 @@ class OverWorldScreen(
                     GAME_HEIGHT / TWO,
                     0f
                 )
-                size.set(ONE_QUARTER, ONE_QUARTER)
+                size.set(ONE, ONE)
             }
             with<InventoryComponent>()
             with<RenderComponent> {
