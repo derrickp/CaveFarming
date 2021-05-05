@@ -16,13 +16,10 @@ import dev.plotsky.cavefarming.components.NameComponent
 import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.crops.CropConfiguration
-import dev.plotsky.cavefarming.crops.CropConfigurations.kane
-import dev.plotsky.cavefarming.crops.CropConfigurations.mushroom
-import dev.plotsky.cavefarming.crops.CropConfigurations.potato
-import dev.plotsky.cavefarming.crops.CropConfigurations.turnip
 import dev.plotsky.cavefarming.crops.CropGrid.buildCropGrid
-import dev.plotsky.cavefarming.crops.CropType
 import dev.plotsky.cavefarming.crops.GrowthStage
+import dev.plotsky.cavefarming.inventory.Item
+import dev.plotsky.cavefarming.inventory.ItemType
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.get
@@ -44,20 +41,57 @@ class ActionsSystem(
                 handlePressedPlantCrop(entity)
                 interact.interact = false
             }
+
+            if (interact.harvest) {
+                handlePressedHarvest(entity)
+                interact.harvest = false
+            }
         }
     }
 
     private fun handlePressedPlantCrop(entity: Entity) {
         entity[TransformComponent.mapper]?.let { transform ->
             val where = Vector2(transform.position.x, transform.position.y)
-
-            when (entity[InventoryComponent.mapper]!!.currentCrop) {
-                CropType.MUSHROOMS -> spawnMushroom(where)
-                CropType.TURNIPS -> spawnTurnip(where)
-                CropType.KANES -> spawnKane(where)
-                CropType.POTATOES -> spawnPotato(where)
-            }
+            val inventory = entity[InventoryComponent.mapper]!!
+            spawnCropGrid(where, inventory.currentCropConfiguration)
         }
+    }
+
+    private fun handlePressedHarvest(entity: Entity) {
+        entity[TransformComponent.mapper]?.let { transform ->
+            val x = transform.position.x + transform.size.x / 2
+            val y = transform.position.y + transform.size.y / 2
+            val where = Vector2(x, y)
+            // Go through all crops
+            // If inside any crop square, add to inventory, and remove from engine
+            val existingCrops = engine.getEntitiesFor(cropFamily)
+            val overlapping = existingCrops.firstOrNull { crop ->
+                val existingGrowingBounds = crop[CropComponent.mapper]?.growingBounds
+                existingGrowingBounds?.contains(where) ?: false
+            } ?: return
+
+            val cropComponent = overlapping[CropComponent.mapper]!!
+
+            if (cropComponent.growthStage != GrowthStage.PLANT) {
+                return
+            }
+
+            val inventoryComponent = entity[InventoryComponent.mapper]!!
+            val cropName = cropComponent.configuration.cropType.name
+            val item = inventoryComponent.items.keys.firstOrNull { it.name == cropName } ?: buildItem(cropComponent)
+            inventoryComponent.items.putIfAbsent(item, 0)
+            inventoryComponent.items[item]?.plus(1)
+
+            engine.removeEntity(overlapping)
+        }
+    }
+
+    private fun buildItem(cropComponent: CropComponent): Item {
+        return Item(
+            cropComponent.configuration.cropType.name,
+            100,
+            ItemType.HARVESTED_ITEM
+        )
     }
 
     private fun spawnCrop(where: Vector2, configuration: CropConfiguration) {
@@ -97,31 +131,10 @@ class ActionsSystem(
         }
     }
 
-    private fun spawnMushroom(where: Vector2) {
-        val gridCells = buildCropGrid(Vector2(where.x, where.y), mushroom)
+    private fun spawnCropGrid(where: Vector2, configuration: CropConfiguration) {
+        val gridCells = buildCropGrid(where, configuration)
         for (cell in gridCells) {
-            spawnCrop(cell, mushroom)
-        }
-    }
-
-    private fun spawnTurnip(where: Vector2) {
-        val gridCells = buildCropGrid(Vector2(where.x, where.y), turnip)
-        for (cell in gridCells) {
-            spawnCrop(cell, turnip)
-        }
-    }
-
-    private fun spawnKane(where: Vector2) {
-        val gridCells = buildCropGrid(Vector2(where.x, where.y), kane)
-        for (cell in gridCells) {
-            spawnCrop(cell, kane)
-        }
-    }
-
-    private fun spawnPotato(where: Vector2) {
-        val gridCells = buildCropGrid(Vector2(where.x, where.y), potato)
-        for (cell in gridCells) {
-            spawnCrop(cell, potato)
+            spawnCrop(cell, configuration)
         }
     }
 

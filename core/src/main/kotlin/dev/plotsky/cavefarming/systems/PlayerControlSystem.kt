@@ -24,6 +24,7 @@ class PlayerControlSystem : InputProcessor,
     private var stopMovement = true
     private var moveDirectionDeg = 0f
     private var actionPressed = false
+    private var harvestPressed = false
 
     override fun addedToEngine(engine: Engine?) {
         super.addedToEngine(engine)
@@ -51,6 +52,7 @@ class PlayerControlSystem : InputProcessor,
             Input.Keys.UP -> updateMovementValues(valueLeftX, MOVE_UP)
             Input.Keys.DOWN -> updateMovementValues(valueLeftX, MOVE_DOWN)
             Input.Keys.SPACE -> actionPressed = true
+            Input.Keys.E -> harvestPressed = true
             Input.Keys.I -> {
                 updateMovementValues(NO_MOVE, NO_MOVE)
             }
@@ -91,6 +93,7 @@ class PlayerControlSystem : InputProcessor,
                 }
             }
             Input.Keys.SPACE -> actionPressed = false
+            Input.Keys.E -> harvestPressed = false
             else -> return false
         }
 
@@ -124,6 +127,7 @@ class PlayerControlSystem : InputProcessor,
     override fun processEntity(entity: Entity, deltaTime: Float) {
         updateMovement(entity)
         processAction(entity)
+        processHarvest(entity)
     }
 
     private fun updateMovement(entity: Entity) {
@@ -143,6 +147,15 @@ class PlayerControlSystem : InputProcessor,
 
         actionPressed = false
         entity[InteractComponent.mapper]?.let { it.interact = true }
+    }
+
+    private fun processHarvest(entity: Entity) {
+        if (!harvestPressed) {
+            return
+        }
+
+        harvestPressed = false
+        entity[InteractComponent.mapper]?.let { it.harvest = true }
     }
 
     companion object {

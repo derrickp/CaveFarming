@@ -21,12 +21,24 @@ class RenderInventorySelectionSystem(
                 inventory.crops.withIndex().forEach { crop ->
                     font.draw(
                         it,
-                        "${crop.index + ONE}: ${crop.value}",
+                        "${crop.index + ONE}: ${crop.value.cropType}",
                         CROP_TEXT_X,
                         CROP_TEXT_Y - crop.index * CROP_TEXT_Y_MODIFIER
                     )
                 }
-                font.draw(it, "Current: ${inventory.currentCrop}", CROP_TEXT_X, CURRENT_CROP_Y)
+                font.draw(
+                    it,
+                    "Current: ${inventory.currentCropConfiguration.cropType}",
+                    CROP_TEXT_X,
+                    CURRENT_CROP_Y
+                )
+
+                font.draw(
+                    it,
+                    "Current harvested number of crop types: ${inventory.items.keys.size}",
+                    CROP_TEXT_X,
+                    HARVESTED_Y
+                )
             }
         }
     }
@@ -35,6 +47,7 @@ class RenderInventorySelectionSystem(
         private const val ONE = 1
         private const val CROP_TEXT_X = 100f
         private const val CROP_TEXT_Y = 400f
+        private const val HARVESTED_Y = 100f
         private const val CROP_TEXT_Y_MODIFIER = 20f
         private const val CURRENT_CROP_Y = 200f
     }
