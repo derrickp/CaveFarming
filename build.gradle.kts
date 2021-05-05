@@ -8,7 +8,7 @@ buildscript {
 plugins {
     idea
     id("io.gitlab.arturbosch.detekt").version("1.16.0")
-    id("org.jlleitschuh.gradle.ktlint").version("10.0.0")
+    id("org.jmailen.kotlinter").version("3.4.4")
 }
 
 allprojects {

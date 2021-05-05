@@ -7,8 +7,8 @@ plugins {
     kotlin("jvm")
     `java-library`
     idea
-    id("org.jlleitschuh.gradle.ktlint")
     id("io.gitlab.arturbosch.detekt")
+    id("org.jmailen.kotlinter")
 }
 
 java {
