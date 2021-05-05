@@ -89,7 +89,7 @@ class ActionsSystem(
     private fun buildItem(cropComponent: CropComponent): Item {
         return Item(
             cropComponent.configuration.cropType.name,
-            100,
+            ITEM_LIMIT,
             ItemType.HARVESTED_ITEM
         )
     }
@@ -147,5 +147,6 @@ class ActionsSystem(
         private const val MAX_X = 39
         private const val MIN_Y = 0
         private const val MAX_Y = 21.75
+        private const val ITEM_LIMIT = 100
     }
 }
