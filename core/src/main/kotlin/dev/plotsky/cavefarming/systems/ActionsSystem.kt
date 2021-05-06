@@ -18,8 +18,7 @@ import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.crops.CropConfiguration
 import dev.plotsky.cavefarming.crops.CropGrid.buildCropGrid
 import dev.plotsky.cavefarming.crops.GrowthStage
-import dev.plotsky.cavefarming.inventory.Item
-import dev.plotsky.cavefarming.inventory.ItemType
+import dev.plotsky.cavefarming.inventory.Items
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.get
@@ -38,60 +37,57 @@ class ActionsSystem(
     override fun processEntity(entity: Entity, deltaTime: Float) {
         entity[InteractComponent.mapper]?.let { interact ->
             if (interact.interact) {
-                handlePressedPlantCrop(entity)
+                handleInteraction(entity)
                 interact.interact = false
             }
-
-            if (interact.harvest) {
-                handlePressedHarvest(entity)
-                interact.harvest = false
-            }
         }
     }
 
-    private fun handlePressedPlantCrop(entity: Entity) {
-        entity[TransformComponent.mapper]?.let { transform ->
+    private fun handleInteraction(player: Entity) {
+        val overlapping = retrieveOverlappingCrop(player)
+
+        if (overlapping != null) {
+            harvest(player, overlapping)
+        } else {
+            plantCrop(player)
+        }
+    }
+
+    private fun retrieveOverlappingCrop(entity: Entity): Entity? {
+        val transform = entity[TransformComponent.mapper]!!
+        val x = transform.position.x + transform.size.x / 2
+        val y = transform.position.y + transform.size.y / 2
+        val where = Vector2(x, y)
+        // Go through all crops
+        // If inside any crop square, add to inventory, and remove from engine
+        val existingCrops = engine.getEntitiesFor(cropFamily)
+        return existingCrops.firstOrNull { crop ->
+            val existingGrowingBounds = crop[CropComponent.mapper]?.growingBounds
+            existingGrowingBounds?.contains(where) ?: false
+        }
+    }
+
+    private fun harvest(player: Entity, crop: Entity) {
+        val cropComponent = crop[CropComponent.mapper]!!
+
+        if (cropComponent.growthStage != GrowthStage.PLANT) {
+            return
+        }
+
+        val inventoryComponent = player[InventoryComponent.mapper]!!
+        val item = Items.itemByCropType(cropComponent.configuration.cropType)
+        inventoryComponent.items.putIfAbsent(item, 0)
+        inventoryComponent.items[item]?.plus(1)
+
+        engine.removeEntity(crop)
+    }
+
+    private fun plantCrop(player: Entity) {
+        player[TransformComponent.mapper]?.let { transform ->
             val where = Vector2(transform.position.x, transform.position.y)
-            val inventory = entity[InventoryComponent.mapper]!!
+            val inventory = player[InventoryComponent.mapper]!!
             spawnCropGrid(where, inventory.currentCropConfiguration)
         }
-    }
-
-    private fun handlePressedHarvest(entity: Entity) {
-        entity[TransformComponent.mapper]?.let { transform ->
-            val x = transform.position.x + transform.size.x / 2
-            val y = transform.position.y + transform.size.y / 2
-            val where = Vector2(x, y)
-            // Go through all crops
-            // If inside any crop square, add to inventory, and remove from engine
-            val existingCrops = engine.getEntitiesFor(cropFamily)
-            val overlapping = existingCrops.firstOrNull { crop ->
-                val existingGrowingBounds = crop[CropComponent.mapper]?.growingBounds
-                existingGrowingBounds?.contains(where) ?: false
-            } ?: return
-
-            val cropComponent = overlapping[CropComponent.mapper]!!
-
-            if (cropComponent.growthStage != GrowthStage.PLANT) {
-                return
-            }
-
-            val inventoryComponent = entity[InventoryComponent.mapper]!!
-            val cropName = cropComponent.configuration.cropType.name
-            val item = inventoryComponent.items.keys.firstOrNull { it.name == cropName } ?: buildItem(cropComponent)
-            inventoryComponent.items.putIfAbsent(item, 0)
-            inventoryComponent.items[item]?.plus(1)
-
-            engine.removeEntity(overlapping)
-        }
-    }
-
-    private fun buildItem(cropComponent: CropComponent): Item {
-        return Item(
-            cropComponent.configuration.cropType.name,
-            ITEM_LIMIT,
-            ItemType.HARVESTED_ITEM
-        )
     }
 
     private fun spawnCrop(where: Vector2, configuration: CropConfiguration) {
@@ -147,6 +143,5 @@ class ActionsSystem(
         private const val MAX_X = 39
         private const val MIN_Y = 0
         private const val MAX_Y = 21.75
-        private const val ITEM_LIMIT = 100
     }
 }
