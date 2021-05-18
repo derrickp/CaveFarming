@@ -17,7 +17,6 @@ import dev.plotsky.cavefarming.components.RenderComponent
 import dev.plotsky.cavefarming.components.TransformComponent
 import dev.plotsky.cavefarming.crops.CropConfiguration
 import dev.plotsky.cavefarming.crops.CropGrid.buildCropGrid
-import dev.plotsky.cavefarming.crops.GrowthStage
 import dev.plotsky.cavefarming.inventory.Items
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -70,7 +69,7 @@ class ActionsSystem(
     private fun harvest(player: Entity, crop: Entity) {
         val cropComponent = crop[CropComponent.mapper]!!
 
-        if (cropComponent.growthStage != GrowthStage.PLANT) {
+        if (!cropComponent.growthStage.harvestable) {
             return
         }
 
@@ -109,12 +108,13 @@ class ActionsSystem(
             return
         }
         engine.entity {
+            val lifeStage = configuration.growthStages.first()
             with<NameComponent> { name = "crop" }
             with<TransformComponent> {
                 position.set(where, 0f)
                 size.set(1f, 1f)
             }
-            val region = assetManager[TextureAtlasAssets.CaveFarming].findRegion(configuration.seedRegionName)
+            val region = assetManager[TextureAtlasAssets.CaveFarming].findRegion(lifeStage.regionName)
             with<RenderComponent> {
                 sprite.setRegion(region)
                 z = 1
@@ -122,7 +122,7 @@ class ActionsSystem(
             with<CropComponent> {
                 this.configuration = configuration
                 this.growingBounds.set(growingBounds)
-                this.growthStage = GrowthStage.SEED
+                this.growthStage = lifeStage
             }
         }
     }

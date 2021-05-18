@@ -54,7 +54,7 @@ object Items {
     }
 
     fun itemByCropType(cropType: CropType): Item {
-        return when(cropType) {
+        return when (cropType) {
             CropType.MUSHROOMS -> harvestedMushrooms
             CropType.KANES -> harvestedKanes
             CropType.POTATOES -> harvestedPotatoes

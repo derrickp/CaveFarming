@@ -15,13 +15,23 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(THREE_SIZE, THREE_SIZE),
             areaNeededPerCrop = Pair(ONE_AREA, ONE_AREA),
-            seedRegionName = "giant_mushroom_spores",
-            cropRegionName = "giant_mushroom",
-            growingSeasonLength = MUSHROOM_SEASON_LENGTH,
-            chanceGrowAfterSeason = MUSHROOM_GROW_CHANCE,
-            tooOldSeasonLength = MUSHROOM_OLD_SEASON_LENGTH,
-            chanceDieAfterSeason = MUSHROOM_DIE_TOO_OLD,
-            CropType.MUSHROOMS
+            CropType.MUSHROOMS,
+            growthStages = listOf(
+                GrowthStage(
+                    name = "spore",
+                    timeInStage = MUSHROOM_SEASON_LENGTH,
+                    regionName = "giant_mushroom_spores",
+                    harvestable = false,
+                    chanceToProgressFromStage = MUSHROOM_GROW_CHANCE
+                ),
+                GrowthStage(
+                    name = "crop",
+                    timeInStage = MUSHROOM_OLD_SEASON_LENGTH,
+                    regionName = "giant_mushroom",
+                    harvestable = true,
+                    chanceToProgressFromStage = MUSHROOM_DIE_TOO_OLD
+                )
+            )
         )
     }
 
@@ -33,13 +43,23 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(FIVE_SIZE, THREE_SIZE),
             areaNeededPerCrop = Pair(TWO_AREA, TWO_AREA),
-            seedRegionName = "kane_seeds",
-            cropRegionName = "kane_stalks",
-            growingSeasonLength = KANE_SEASON_LENGTH,
-            chanceGrowAfterSeason = KANE_GROW_CHANCE,
-            tooOldSeasonLength = KANE_OLD_SEASON_LENGTH,
-            chanceDieAfterSeason = KANE_DIE_TOO_OLD,
-            CropType.KANES
+            CropType.KANES,
+            growthStages = listOf(
+                GrowthStage(
+                    name = "seed",
+                    timeInStage = KANE_SEASON_LENGTH,
+                    regionName = "kane_seeds",
+                    harvestable = false,
+                    chanceToProgressFromStage = KANE_GROW_CHANCE
+                ),
+                GrowthStage(
+                    name = "stalks",
+                    timeInStage = KANE_OLD_SEASON_LENGTH,
+                    regionName = "kane_stalks",
+                    harvestable = true,
+                    chanceToProgressFromStage = KANE_DIE_TOO_OLD
+                )
+            )
         )
     }
 
@@ -51,13 +71,23 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(ONE_SIZE, ONE_SIZE),
             areaNeededPerCrop = Pair(ONE_AREA, ONE_AREA),
-            seedRegionName = "turnip_seed",
-            cropRegionName = "turnip_top",
-            growingSeasonLength = TURNIP_SEASON_LENGTH,
-            chanceGrowAfterSeason = TURNIP_GROW_CHANCE,
-            tooOldSeasonLength = TURNIP_OLD_SEASON_LENGTH,
-            chanceDieAfterSeason = TURNIP_DIE_TOO_OLD,
-            CropType.TURNIPS
+            CropType.TURNIPS,
+            growthStages = listOf(
+                GrowthStage(
+                    name = "seed",
+                    timeInStage = TURNIP_SEASON_LENGTH,
+                    regionName = "turnip_seed",
+                    harvestable = false,
+                    chanceToProgressFromStage = TURNIP_GROW_CHANCE
+                ),
+                GrowthStage(
+                    name = "crop",
+                    timeInStage = TURNIP_OLD_SEASON_LENGTH,
+                    regionName = "turnip_top",
+                    harvestable = true,
+                    chanceToProgressFromStage = TURNIP_DIE_TOO_OLD
+                )
+            )
         )
     }
 
@@ -69,13 +99,23 @@ object CropConfigurations {
         CropConfiguration(
             gridSize = Pair(ONE_SIZE, THREE_SIZE),
             areaNeededPerCrop = Pair(ONE_AREA, ONE_AREA),
-            seedRegionName = "potato_seeds",
-            cropRegionName = "potatoes",
-            growingSeasonLength = POTATO_SEASON_LENGTH,
-            chanceGrowAfterSeason = POTATO_GROW_CHANCE,
-            tooOldSeasonLength = POTATO_OLD_SEASON_LENGTH,
-            chanceDieAfterSeason = POTATO_DIE_TOO_OLD,
-            CropType.POTATOES
+            CropType.POTATOES,
+            growthStages = listOf(
+                GrowthStage(
+                    name = "seed",
+                    timeInStage = POTATO_SEASON_LENGTH,
+                    regionName = "potato_seeds",
+                    harvestable = false,
+                    chanceToProgressFromStage = POTATO_GROW_CHANCE
+                ),
+                GrowthStage(
+                    name = "crop",
+                    timeInStage = POTATO_OLD_SEASON_LENGTH,
+                    regionName = "potatoes",
+                    harvestable = true,
+                    chanceToProgressFromStage = POTATO_DIE_TOO_OLD
+                )
+            )
         )
     }
 }

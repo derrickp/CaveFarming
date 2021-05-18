@@ -1,8 +1,9 @@
 package dev.plotsky.cavefarming.crops
 
-enum class GrowthStage {
-    SEED,
-    SPROUT,
-    PLANT,
-    DEAD
-}
+data class GrowthStage(
+    val name: String,
+    val timeInStage: Int,
+    val regionName: String,
+    val harvestable: Boolean,
+    val chanceToProgressFromStage: Float
+)

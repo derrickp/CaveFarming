@@ -10,7 +10,7 @@ class CropComponent : Component {
     lateinit var configuration: CropConfiguration
     val growingBounds = Rectangle()
     var ageTick = 0
-    var growthStage = GrowthStage.SEED
+    lateinit var growthStage: GrowthStage
 
     companion object {
         val mapper = mapperFor<CropComponent>()
