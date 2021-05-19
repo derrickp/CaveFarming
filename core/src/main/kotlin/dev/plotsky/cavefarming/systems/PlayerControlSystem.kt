@@ -8,10 +8,9 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.math.MathUtils
 import dev.plotsky.cavefarming.components.CharacterComponent
-import dev.plotsky.cavefarming.components.InteractComponent
-import dev.plotsky.cavefarming.components.MoveComponent
+import dev.plotsky.cavefarming.components.InteractComponent.Companion.interact
+import dev.plotsky.cavefarming.components.MoveComponent.Companion.move
 import ktx.ashley.allOf
-import ktx.ashley.get
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan2
@@ -127,7 +126,7 @@ class PlayerControlSystem : InputProcessor,
     }
 
     private fun updateMovement(entity: Entity) {
-        with(entity[MoveComponent.mapper]!!) {
+        with(entity.move()) {
             root = stopMovement
             if (!root) {
                 cosDeg = MathUtils.cosDeg(moveDirectionDeg)
@@ -142,7 +141,7 @@ class PlayerControlSystem : InputProcessor,
         }
 
         actionPressed = false
-        entity[InteractComponent.mapper]?.let { it.interact = true }
+        entity.interact().interact = true
     }
 
     companion object {

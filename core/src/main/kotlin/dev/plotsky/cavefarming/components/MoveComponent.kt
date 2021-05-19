@@ -1,7 +1,9 @@
 package dev.plotsky.cavefarming.components
 
 import com.badlogic.ashley.core.Component
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
+import ktx.ashley.get
 import ktx.ashley.mapperFor
 
 class MoveComponent : Component {
@@ -20,5 +22,9 @@ class MoveComponent : Component {
         private const val MAX_SPEED = 5f
         private const val COS_DEGREE = 0f
         private const val SIN_DEGREE = 0f
+
+        fun Entity.move(): MoveComponent {
+            return this[mapper]!!
+        }
     }
 }

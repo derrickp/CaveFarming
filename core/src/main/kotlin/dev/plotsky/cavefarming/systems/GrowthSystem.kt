@@ -5,11 +5,11 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.systems.IntervalSystem
 import com.badlogic.gdx.assets.AssetManager
 import dev.plotsky.cavefarming.GROWING_INTERVAL
-import dev.plotsky.cavefarming.assets.TextureAtlasAssets
-import dev.plotsky.cavefarming.assets.get
+import dev.plotsky.cavefarming.assets.caveFarmingAtlas
 import dev.plotsky.cavefarming.components.CropComponent
+import dev.plotsky.cavefarming.components.CropComponent.Companion.crop
 import dev.plotsky.cavefarming.components.RenderComponent
-import ktx.ashley.get
+import dev.plotsky.cavefarming.components.RenderComponent.Companion.render
 import kotlin.random.Random
 
 class GrowthSystem(private val assetManager: AssetManager) : IntervalSystem(
@@ -27,8 +27,8 @@ class GrowthSystem(private val assetManager: AssetManager) : IntervalSystem(
         }
     }
 
-    private fun progressCrop(crop: Entity) {
-        val cropComponent = crop[CropComponent.mapper]!!
+    private fun progressCrop(entity: Entity) {
+        val cropComponent = entity.crop()
         cropComponent.ageTick = cropComponent.ageTick + 1
         if (cropComponent.ageTick <= cropComponent.growthStage.timeInStage) {
             return
@@ -42,12 +42,12 @@ class GrowthSystem(private val assetManager: AssetManager) : IntervalSystem(
         val currentIndex = cropComponent.configuration.growthStages.indexOf(cropComponent.growthStage)
         val nextStage = cropComponent.configuration.growthStages.getOrNull(currentIndex + 1)
         if (nextStage == null) {
-            engine.removeEntity(crop)
+            engine.removeEntity(entity)
         } else {
             cropComponent.ageTick = 0
             cropComponent.growthStage = nextStage
-            val renderComponent = crop[RenderComponent.mapper]!!
-            val region = assetManager[TextureAtlasAssets.CaveFarming]
+            val renderComponent = entity.render()
+            val region = assetManager.caveFarmingAtlas()
                 .findRegion(cropComponent.growthStage.regionName)
             renderComponent.sprite.setRegion(region)
         }

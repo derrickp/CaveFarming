@@ -5,14 +5,14 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import dev.plotsky.cavefarming.components.InventoryComponent
+import dev.plotsky.cavefarming.components.InventoryComponent.Companion.inventory
 import ktx.ashley.allOf
-import ktx.ashley.get
 
 class ChooseCropSystem : IteratingSystem(
     allOf(InventoryComponent::class).get()
 ) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        entity[InventoryComponent.mapper]?.let {
+        entity.inventory().let {
             when {
                 Gdx.input.isKeyJustPressed(Input.Keys.NUM_1) -> {
                     it.currentCropConfiguration = it.crops[FIRST_CROP_INDEX]

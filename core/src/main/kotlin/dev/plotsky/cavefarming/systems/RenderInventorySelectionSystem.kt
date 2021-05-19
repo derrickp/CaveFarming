@@ -5,8 +5,8 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import dev.plotsky.cavefarming.components.InventoryComponent
+import dev.plotsky.cavefarming.components.InventoryComponent.Companion.inventory
 import ktx.ashley.allOf
-import ktx.ashley.get
 import ktx.graphics.use
 
 class RenderInventorySelectionSystem(
@@ -16,7 +16,7 @@ class RenderInventorySelectionSystem(
     allOf(InventoryComponent::class).get()
 ) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        entity[InventoryComponent.mapper]?.let { inventory ->
+        entity.inventory().let { inventory ->
             batch.use {
                 inventory.crops.withIndex().forEach { crop ->
                     font.draw(

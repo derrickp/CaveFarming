@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.utils.viewport.Viewport
-import dev.plotsky.cavefarming.components.Box2DComponent
+import dev.plotsky.cavefarming.components.Box2DComponent.Companion.boxOrNull
 import dev.plotsky.cavefarming.components.RenderComponent
+import dev.plotsky.cavefarming.components.RenderComponent.Companion.render
 import dev.plotsky.cavefarming.components.TransformComponent
+import dev.plotsky.cavefarming.components.TransformComponent.Companion.transform
 import ktx.ashley.allOf
-import ktx.ashley.get
 import ktx.graphics.use
 
 class RenderSystem(
@@ -19,7 +20,7 @@ class RenderSystem(
     private val renderer: OrthogonalTiledMapRenderer
 ) : SortedIteratingSystem(
     allOf(TransformComponent::class, RenderComponent::class).get(),
-    compareBy { entity: Entity -> entity[RenderComponent.mapper]?.z }
+    compareBy { entity: Entity -> entity.render().z }
 ) {
     override fun update(deltaTime: Float) {
         forceSort()
@@ -33,9 +34,9 @@ class RenderSystem(
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val transform = entity[TransformComponent.mapper]!!
-        val render = entity[RenderComponent.mapper]!!
-        val box2dCmp = entity[Box2DComponent.mapper]
+        val transform = entity.transform()
+        val render = entity.render()
+        val box2dCmp = entity.boxOrNull()
         render.sprite.run {
             if (box2dCmp != null) {
                 setBounds(

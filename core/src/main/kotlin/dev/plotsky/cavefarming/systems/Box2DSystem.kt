@@ -5,9 +5,10 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.physics.box2d.World
 import dev.plotsky.cavefarming.components.Box2DComponent
+import dev.plotsky.cavefarming.components.Box2DComponent.Companion.box
 import dev.plotsky.cavefarming.components.TransformComponent
+import dev.plotsky.cavefarming.components.TransformComponent.Companion.transform
 import ktx.ashley.allOf
-import ktx.ashley.get
 import kotlin.math.min
 
 class Box2DSystem(
@@ -40,8 +41,8 @@ class Box2DSystem(
      */
     private fun updatePrevPositionAndApplyForces() {
         entities.forEach { entity ->
-            val transformCmp = entity[TransformComponent.mapper]!!
-            val box2dCmp = entity[Box2DComponent.mapper]!!
+            val transformCmp = entity.transform()
+            val box2dCmp = entity.box()
             val halfW = transformCmp.size.x * HALF
             val halfH = transformCmp.size.y * HALF
             val body = box2dCmp.body
@@ -63,8 +64,8 @@ class Box2DSystem(
      */
     private fun updatePositionAndRenderPosition(alpha: Float) {
         entities.forEach { entity ->
-            val transformCmp = entity[TransformComponent.mapper]!!
-            val box2dCmp = entity[Box2DComponent.mapper]!!
+            val transformCmp = entity.transform()
+            val box2dCmp = entity.box()
             val halfW = transformCmp.size.x * HALF
             val halfH = transformCmp.size.y * HALF
             val body = box2dCmp.body

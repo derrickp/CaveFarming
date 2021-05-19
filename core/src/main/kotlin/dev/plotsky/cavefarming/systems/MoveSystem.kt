@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import dev.plotsky.cavefarming.components.Box2DComponent
 import dev.plotsky.cavefarming.components.MoveComponent
+import dev.plotsky.cavefarming.components.MoveComponent.Companion.move
 import dev.plotsky.cavefarming.components.TransformComponent
 import ktx.ashley.allOf
 import ktx.ashley.get
@@ -12,7 +13,7 @@ import kotlin.math.min
 
 class MoveSystem : IteratingSystem(allOf(TransformComponent::class, MoveComponent::class).get()) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        with(entity[MoveComponent.mapper]!!) {
+        with(entity.move()) {
             val box2dCmp = entity[Box2DComponent.mapper]!!
             if (root) {
                 box2dCmp.impulse.x = box2dCmp.body.mass * (0f - box2dCmp.body.linearVelocity.x)
