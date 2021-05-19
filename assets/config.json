@@ -1,0 +1,112 @@
+{
+  "crops": [
+    {
+      "cropType": "mushrooms",
+      "areaNeededPerCrop": {
+        "first": 1.0,
+        "second": 1.0
+      },
+      "gridSize": {
+        "first": 3,
+        "second": 3
+      },
+      "growthStages": [
+        {
+          "chanceToProgressFromStage": 0.75,
+          "harvestable": false,
+          "name": "spore",
+          "timeInStage": 10,
+          "regionName": "giant_mushroom_spores"
+        },
+        {
+          "chanceToProgressFromStage": 0.01,
+          "harvestable": true,
+          "name": "mushroom",
+          "timeInStage": 30,
+          "regionName": "giant_mushroom"
+        }
+      ]
+    },
+    {
+      "cropType": "kanes",
+      "areaNeededPerCrop": {
+        "first": 2.0,
+        "second": 2.0
+      },
+      "gridSize": {
+        "first": 5,
+        "second": 3
+      },
+      "growthStages": [
+        {
+          "chanceToProgressFromStage": 0.7,
+          "harvestable": false,
+          "name": "seed",
+          "timeInStage": 5,
+          "regionName": "kane_seeds"
+        },
+        {
+          "chanceToProgressFromStage": 0.1,
+          "harvestable": true,
+          "name": "stalks",
+          "timeInStage": 15,
+          "regionName": "kane_stalks"
+        }
+      ]
+    },
+    {
+      "cropType": "potatoes",
+      "areaNeededPerCrop": {
+        "first": 1.0,
+        "second": 1.0
+      },
+      "gridSize": {
+        "first": 1,
+        "second": 3
+      },
+      "growthStages": [
+        {
+          "chanceToProgressFromStage": 0.7,
+          "harvestable": false,
+          "name": "seed",
+          "timeInStage": 10,
+          "regionName": "potato_seeds"
+        },
+        {
+          "chanceToProgressFromStage": 0.05,
+          "harvestable": true,
+          "name": "potatoes",
+          "timeInStage": 30,
+          "regionName": "potatoes"
+        }
+      ]
+    },
+    {
+      "cropType": "turnips",
+      "areaNeededPerCrop": {
+        "first": 1.0,
+        "second": 1.0
+      },
+      "gridSize": {
+        "first": 1,
+        "second": 1
+      },
+      "growthStages": [
+        {
+          "chanceToProgressFromStage": 0.8,
+          "harvestable": false,
+          "name": "seed",
+          "timeInStage": 20,
+          "regionName": "turnip_seed"
+        },
+        {
+          "chanceToProgressFromStage": 0.001,
+          "harvestable": true,
+          "name": "plant",
+          "timeInStage": 40,
+          "regionName": "turnip_top"
+        }
+      ]
+    }
+  ]
+}
