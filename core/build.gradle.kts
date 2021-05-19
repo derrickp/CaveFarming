@@ -9,6 +9,7 @@ plugins {
     idea
     id("io.gitlab.arturbosch.detekt")
     id("org.jmailen.kotlinter")
+    kotlin("plugin.serialization")
 }
 
 java {
@@ -29,4 +30,5 @@ dependencies {
     api("io.github.libktx:ktx-inject:$ktxVersion")
     api("io.github.libktx:ktx-log:$ktxVersion")
     api("io.github.libktx:ktx-tiled:$ktxVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 }

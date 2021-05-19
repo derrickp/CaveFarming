@@ -3,6 +3,7 @@ plugins {
     id "kotlin"
     id "java-library"
     id "idea"
+    id "org.jetbrains.kotlin.plugin.serialization"
 }
 
 sourceSets.main.resources.srcDirs += [rootProject.file("assets").path]

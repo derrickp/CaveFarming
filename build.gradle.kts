@@ -9,6 +9,8 @@ plugins {
     idea
     id("io.gitlab.arturbosch.detekt").version("1.16.0")
     id("org.jmailen.kotlinter").version("3.4.4")
+    kotlin("jvm").version("1.5.0")
+    kotlin("plugin.serialization").version("1.5.0")
 }
 
 allprojects {
