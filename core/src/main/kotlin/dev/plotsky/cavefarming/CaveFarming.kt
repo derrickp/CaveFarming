@@ -13,6 +13,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import dev.plotsky.cavefarming.screens.InventoryScreen
 import dev.plotsky.cavefarming.screens.LoadingScreen
 import dev.plotsky.cavefarming.screens.OverWorldScreen
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 import ktx.inject.Context
@@ -26,6 +28,10 @@ const val GROWING_INTERVAL = 1f
 class CaveFarming : KtxGame<KtxScreen>() {
     private val context = Context()
     override fun create() {
+        val file = Gdx.files.local("config.json")
+        val text = file.readString()
+        val config = Json.decodeFromString<Configuration>(text)
+
         context.register {
             bindSingleton<Batch>(SpriteBatch())
             val font = BitmapFont().apply {
@@ -39,13 +45,14 @@ class CaveFarming : KtxGame<KtxScreen>() {
                     setToOrtho(false, Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
                 }
             )
+            bindSingleton(config)
             bindSingleton(PooledEngine())
             val assetManager = AssetManager()
             assetManager.setLoader(TiledMap::class.java, TmxMapLoader(InternalFileHandleResolver()))
 
             bindSingleton(assetManager)
             addScreen(LoadingScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
-            addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject()))
+            addScreen(OverWorldScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
             addScreen(InventoryScreen(this@CaveFarming, inject(), inject(), inject(), inject()))
         }
 

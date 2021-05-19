@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.viewport.FitViewport
 import dev.plotsky.cavefarming.CaveFarming
+import dev.plotsky.cavefarming.Configuration
 import dev.plotsky.cavefarming.GAME_HEIGHT
 import dev.plotsky.cavefarming.GAME_WIDTH
 import dev.plotsky.cavefarming.assets.TextureAtlasAssets
@@ -51,7 +52,8 @@ class OverWorldScreen(
     private val caveFarming: CaveFarming,
     private val batch: Batch,
     private val engine: PooledEngine,
-    private val assetManager: AssetManager
+    private val assetManager: AssetManager,
+    private val configuration: Configuration,
 ) : KtxScreen {
     private val viewport = FitViewport(GAME_WIDTH, GAME_HEIGHT)
     private val world = World(Vector2.Zero, true).apply {
@@ -135,7 +137,10 @@ class OverWorldScreen(
                 )
                 size.set(ONE, ONE)
             }
-            with<InventoryComponent>()
+            with<InventoryComponent> {
+                crops = configuration.crops
+                currentCropConfiguration = crops.first()
+            }
             with<RenderComponent> {
                 sprite.setRegion(assetManager[TextureAtlasAssets.CaveFarming].findRegion("goblin_big_hat"))
                 z = CHARACTER_Z_LEVEL
